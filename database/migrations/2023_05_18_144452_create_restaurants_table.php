@@ -15,6 +15,12 @@ return new class extends Migration
     {
         Schema::create('restaurants', function (Blueprint $table) {
             $table->id();
+            $table->string('company_name')->required();
+            $table->string('andress')->required();
+            $table->tinyInteger('vat_number')->required();
+            $table->string('telephone')->required()->unique();
+            $table->text('description');
+            $table->string('immagine')->required();
             $table->timestamps();
         });
     }
