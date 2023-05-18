@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('telephone')->required()->unique();
             $table->text('description');
             $table->string('immagine')->required();
+            $table->unsignedBigInteger('owner_id');
+            $table->foreign('owner_id')->references('id')->on('owners');
             $table->timestamps();
         });
     }
