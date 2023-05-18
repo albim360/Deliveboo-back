@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('typologies', function (Blueprint $table) {
             $table->id();
+            $table->string('category_kitchen')->required();
             $table->timestamps();
         });
     }
