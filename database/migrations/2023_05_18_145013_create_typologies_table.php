@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('_restaurant_typology', function (Blueprint $table) {
+        Schema::create('typologies', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
         });
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('_restaurant_typology');
+        Schema::dropIfExists('typologies');
     }
 };
