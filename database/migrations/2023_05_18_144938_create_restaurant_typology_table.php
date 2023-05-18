@@ -14,8 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('restaurant_typology', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->unsignedBigInteger('restaurant_id');
+            $table->foreign('restaurant_id')->references('id')->on('restaurants');
+
+            $table->unsignedBigInteger('typology_id');
+            $table->foreign('typology_id')->references('id')->on('typologies');
         });
     }
 
