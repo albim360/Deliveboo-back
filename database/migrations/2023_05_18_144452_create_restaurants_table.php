@@ -16,13 +16,11 @@ return new class extends Migration
         Schema::create('restaurants', function (Blueprint $table) {
             $table->id();
             $table->string('company_name')->required();
-            $table->string('andress')->required();
-            $table->tinyInteger('vat_number')->required();
+            $table->string('address')->required();                     
+            $table->integer('vat_number')->nullable(false);
             $table->string('telephone')->required()->unique();
             $table->text('description');
-            $table->string('immagine')->required();
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }
