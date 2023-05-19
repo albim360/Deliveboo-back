@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Product;
+use App\Models\Restaurant;
 
 class ProductSeeder extends Seeder
 {
@@ -94,10 +95,13 @@ class ProductSeeder extends Seeder
         ];
 
         foreach ($products as $product){
+            $restaurantId =Restaurant::pluck('id')->random();
+
             $newProduct = new Product();
             $newProduct->name = $product['name'];
             $newProduct->price = $product['price'];
             $newProduct->description = $product['description'];
+            $newProduct->restaurant_id = $restaurantId;
             $newProduct->save();
         }
     }
