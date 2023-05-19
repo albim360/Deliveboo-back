@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('company_name')->required();
             $table->string('address')->required();                     
-            $table->integer('vat_number')->nullable(false);
+            $table->integer('vat_number')->required();
             $table->string('telephone')->required()->unique();
             $table->text('description');
             $table->string('image')->nullable();

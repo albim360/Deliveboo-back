@@ -17,8 +17,6 @@ return new class extends Migration
             $table->string('name')->required();
             $table->decimal('price', 8, 2)->required();
             $table->text('description');
-            $table->unsignedBigInteger('restaurant_id');
-            $table->foreign('restaurant_id')->references('id')->on('restaurants');
             $table->timestamps();
         });
     }

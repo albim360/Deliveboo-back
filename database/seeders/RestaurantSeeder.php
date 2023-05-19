@@ -3,9 +3,10 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Faker\Factory as Faker;
+use Faker\Generator as Faker;
 use App\Models\Restaurant;
 use App\Models\Typology;
+use App\Models\Product;
 
 
 class RestaurantSeeder extends Seeder
@@ -15,11 +16,11 @@ class RestaurantSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(Faker $faker)
     {
-        $faker = Faker::create();
         
-
+        
+        $productIds = Product::pluck('id')->all();
         $typology_Ids = Typology::pluck('id')->all();
         $companyNames = ['Zia Restaurant ','daGorini',' Marotta Ristorante',' Dina','Condividere',' L’Argine a Vencò','Ristorante Villa Maiella','Antica Osteria Nonna Rosa','Gambero Rosso','Colline Ciociare','Abocar Due Cucine','Re Santi e Leoni','Oasis Sapori Antichi','Dalla Gioconda'];
 
@@ -30,9 +31,11 @@ class RestaurantSeeder extends Seeder
             $restaurant->vat_number = (string) $faker->randomNumber(5, true);
             $restaurant->telephone = $faker->unique()->phoneNumber;
             $restaurant->description = $faker->text; 
+           
+            $restaurant->product_id = $faker->randomElement($productIds);
             $restaurant->save();
 
-            $restaurant->typologies()->attach($faker->randomElements($typology_Ids, $faker->numberBetween(1, 2)));
+            $restaurant->typologies()->attach($faker->randomElement($typology_Ids, $faker->numberBetween(1, 2)));
         }
     }
 }

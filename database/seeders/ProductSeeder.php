@@ -93,15 +93,16 @@ class ProductSeeder extends Seeder
                 "description" => "descizione...",
             ],
         ];
+        
 
         foreach ($products as $product){
-            $restaurantId =Restaurant::pluck('id')->random();
+            
 
             $newProduct = new Product();
             $newProduct->name = $product['name'];
             $newProduct->price = $product['price'];
             $newProduct->description = $product['description'];
-            $newProduct->restaurant_id = $restaurantId;
+            
             $newProduct->save();
         }
     }
