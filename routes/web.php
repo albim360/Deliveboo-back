@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\RestaurantController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,7 +30,15 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::post('/restaurants/{restaurant:slug}/restore', [RestaurantController::class, 'restore'])->name('restaunts.restore')->withTrashed();
+    Route::post('/products/{product:slug}/restore', [ProductController::class, 'restore'])->name('products.restore')->withTrashed();
+    Route::post('/orders/{order}/restore', [OrderController::class, 'restore'])->name('orders.restore')->withTrashed();
+    Route::resource('products', ProductController::class)->parameters([
+        'products' =>'product:slug'
+    ])->withTrashed(['show', 'edit', 'update', 'destroy']);
 
+    Route::resource('orders', ProductController::class)->parameters([
+        'orders' =>'order'
+    ])->withTrashed(['show', 'edit', 'update', 'destroy']);
    
     Route::resource('restaurants', RestaurantController::class)->parameters([
         'restaurants' =>'restaurant:slug'
