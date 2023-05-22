@@ -5,7 +5,7 @@
     
 
   <div class="container">
-      <form action="{{ route('producuts.update',$product)t }}" method="POST">
+      <form action="{{ route('producuts.update',$product)}}" method="POST">
   
           @csrf
           @method('PUT')
