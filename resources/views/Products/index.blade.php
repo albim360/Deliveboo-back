@@ -13,7 +13,7 @@
     
                 @forelse ($products as $product)
                 
-                    <p>{{$project->id}}</p>
+                    <p>{{$product->id}}</p>
                     <p><a href="{{route('products.show',$product)}}">{{$product->name}}</a></p>
                     <p>{{$product->name}}</p>
                     <p>{{$product->description}}</p>
@@ -37,8 +37,8 @@
                         
                     
                     <botton>
-                        @if($project->trashed())
-                            <form action="{{ route('products.restore',$project) }}" method="POST">
+                        @if($product->trashed())
+                            <form action="{{ route('products.restore',$product) }}" method="POST">
                                 @csrf
                                 <input class="btn btn-sm btn-success" type="submit" value="Ripristina">
                             </form>

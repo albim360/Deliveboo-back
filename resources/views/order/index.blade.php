@@ -13,7 +13,7 @@
     
                 @forelse ($orders as $order)
                 
-                    <p>{{$project->date}}</p>
+                    <p>{{$order->date}}</p>
                     <p><a href="{{route('orders.show',$order)}}">{{$order->full_name}}</a></p>
                     <p>{{$order->date}}</p>
                     <p>{{$order->full_name}}</p>
