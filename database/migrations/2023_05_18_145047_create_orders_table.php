@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('telephone', 30)->required();
             $table->string('address', 100)->required();
             $table->string('email')->required();
+            
             $table->timestamps();
         });
     }

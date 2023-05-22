@@ -101,7 +101,7 @@ class ProductSeeder extends Seeder
 
             $newProduct = new Product();
             $newProduct->name = $product['name'];
-            $product->slug = Str::slug($product->name, '_');
+            $newProduct->slug = Str::slug($product['name'], '_');
             $newProduct->price = $product['price'];
             $newProduct->description = $product['description'];
             

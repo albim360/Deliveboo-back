@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
-class OrderController extends Controller
+use App\Models\restaurant;
+use App\Http\Requests\StorerestaurantRequest;
+use App\Http\Requests\UpdaterestaurantRequest;
+use Illuminate\validation\Rule;
+use Illuminate\Support\Str;
+class RestaurantController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,9 +17,9 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = order::withTrashed()->get();
+        $restaurants = restaurant::withTrashed()->get();
 
-        return view('orders.index', compact('orders'));
+        return view('restaurants.index', compact('restaurants'));
     }
 
     /**
@@ -25,7 +29,7 @@ class OrderController extends Controller
      */
     public function create()
     {
-        return view('orders.create',compact('orders'));
+        return view('restaurants.create',compact('restaurants'));
     }
 
     /**
@@ -38,10 +42,10 @@ class OrderController extends Controller
     {
         $data = $request->validated();
 
-        $Order = order::create($data);    
-        
+        $restaurant = restaurant::create($data);    
+        $data['slug'] = Str::slug($data['company_name']);
 
-        return to_route('orders.show', $order);
+        return to_route('restaurants.show', $restaurant);
     }
 
     /**
@@ -52,7 +56,7 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        return view('orders.show',compact('order'));
+        return view('restaurants.show',compact('restaurant'));
     }
 
     /**
@@ -63,7 +67,7 @@ class OrderController extends Controller
      */
     public function edit($id)
     {
-        return view('orders.edit', compact('order'));
+        return view('restaurants.edit', compact('restaurant'));
     }
 
     /**
@@ -76,9 +80,9 @@ class OrderController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->validated();
-        $order->update($data);
-        
-        return to_route('orders.show', $order);
+        $restaurant->update($data);
+        $data['slug'] = Str::slug($data['company_name']);
+        return to_route('restaurants.show', $restaurant);
     }
     
 
@@ -90,12 +94,12 @@ class OrderController extends Controller
      */
     public function destroy($id)
     {
-        if ($product->trashed()) {
-            $product->forceDelete(); 
+        if ($restaurant->trashed()) {
+            $restaurant->forceDelete(); 
         } else {
-            $product->delete(); 
+            $restaurant->delete(); 
         }
 
-        return to_route('products.index');
+        return to_route('restaurants.index');
     }
 }
