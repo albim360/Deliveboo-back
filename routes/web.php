@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RestaurantController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,6 +27,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::post('/restaurants/{post:slug}/restore', [RestaurantController::class, 'restore'])->name('restaurants.restore')->withTrashed();
+
+    Route::resource('restaurants', RestaurantController::class)->parameters([
+        'restaurants' => 'post:slug'
+    ])->withTrashed(['show', 'edit', 'update', 'destroy']);
 });
 
 require __DIR__.'/auth.php';
