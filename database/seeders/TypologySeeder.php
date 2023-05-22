@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Typology;
 use Illuminate\Database\Seeder;
-
+use Illuminate\Support\Str;
 class TypologySeeder extends Seeder
 {
     /**
@@ -20,6 +20,7 @@ class TypologySeeder extends Seeder
            
             $new_typology = new Typology();
             $new_typology->category_kitchen = $typology;
+            $new_typology->slug = Str::slug($new_typology->category_kitchen, '_');
             $new_typology->save();
             
         }

@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('telephone')->required()->unique();
             $table->text('description');
             $table->string('image')->nullable();
+            
             $table->timestamps();
         });
     }
