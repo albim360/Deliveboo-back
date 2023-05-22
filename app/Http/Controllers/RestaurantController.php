@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Typology;
 use App\Models\Restaurant;
-use App\Http\Requests\StorerestaurantRequest;
-use App\Http\Requests\UpdaterestaurantRequest;
+use App\Http\Requests\StoreRestaurantRequest;
+use App\Http\Requests\UpdateRestaurantRequest;
 use Illuminate\Support\Str;
 
 class RestaurantController extends Controller
@@ -31,7 +31,7 @@ class RestaurantController extends Controller
     public function create()
     {
         $typologies = Typology::all();
-    
+
         return view('restaurants.create', compact('typologies'));
     }
     /**

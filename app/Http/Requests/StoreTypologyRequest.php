@@ -24,7 +24,7 @@ class StoreTypologyRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'category_kitchen' => 'required|min:3|string',
         ];
     }
 }
