@@ -49,6 +49,11 @@ class RestaurantController extends Controller
 
         $restaurant = Restaurant::create($data);
 
+        //se al ristorante è collegata una tipologia attaccala
+        if (isset($data['tipologies'])) {
+            $restaurant->tipologies()->attach($data['tipologies']);
+        }
+
         return redirect()->route('restaurants.show', $restaurant);
     }
 
@@ -71,7 +76,9 @@ class RestaurantController extends Controller
      */
     public function edit(Restaurant $restaurant)
     {
-        return view('restaurants.edit', compact('restaurant'));
+        $typologies = Typology::all(); //prendo typologies
+
+        return view('restaurants.edit', compact('restaurant,typologies'));
     }
 
     /**
@@ -88,18 +95,41 @@ class RestaurantController extends Controller
 
         $restaurant->update($data);
 
+        //aggiorno le tipologie se ci sono
+        if (isset($data['typologies'])) {
+            $restaurant->typologies()->sync($data['typologies']);
+        }else{
+            $restaurant->typologies()->sync([]);
+            //alternativa usare detach()
+        }
+
         return redirect()->route('restaurants.show', $restaurant);
     }
 
+    //funzione per ripristinare
+    public function restore(Request $request, Restaurant $restaurant)
+    {
+
+        if ($restaurant->trashed()) {
+            $restaurant->restore();
+
+            $restaurant->session()->flash('message', 'Il ristorante è stato ripristinato.');
+        }
+
+        return back();
+    }
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Restaurant  $restaurant
      * @return \Illuminate\Http\Response
      */
+    
     public function destroy(Restaurant $restaurant)
     {
         if ($restaurant->trashed()) {
+            $restaurant->typologies()->detach(); //elimino i collegamenti con la tabella ponte. Alternativa sulla migration modificare restric
+            //forse va eliminato anche il collegamento con products
             $restaurant->forceDelete();
         } else {
             $restaurant->delete();
