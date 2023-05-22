@@ -6,6 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Product;
 use App\Models\Restaurant;
+use Illuminate\Support\Str;
 
 class ProductSeeder extends Seeder
 {
@@ -100,6 +101,7 @@ class ProductSeeder extends Seeder
 
             $newProduct = new Product();
             $newProduct->name = $product['name'];
+            $product->slug = Str::slug($product->name, '_');
             $newProduct->price = $product['price'];
             $newProduct->description = $product['description'];
             

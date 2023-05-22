@@ -27,10 +27,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::post('/restaurants/{restaurant:slug}/restore', [ProjectController::class, 'restore'])->name('restaunts.restore')->withTrashed();
+    Route::post('/restaurants/{restaurant:slug}/restore', [RestaurantController::class, 'restore'])->name('restaunts.restore')->withTrashed();
 
    
-    Route::resource('restaurants', ProjectController::class)->parameters([
+    Route::resource('restaurants', RestaurantController::class)->parameters([
         'restaurants' =>'restaurant:slug'
     ])->withTrashed(['show', 'edit', 'update', 'destroy']);
 });

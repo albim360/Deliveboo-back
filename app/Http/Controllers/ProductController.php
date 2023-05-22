@@ -43,6 +43,7 @@ class ProductController extends Controller
         $data = $request->validated();
 
         $product = Product::create($data);    
+        $data['slug'] = Str::slug($data['name']);
 
         return to_route('products.show', $product);
     }
@@ -80,6 +81,7 @@ class ProductController extends Controller
     {
         $data = $request->validated();
         $product->update($data);
+        $data['slug'] = Str::slug($data['name']);
         return to_route('products.show', $product);
     }
     
