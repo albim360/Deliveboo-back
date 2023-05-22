@@ -27,7 +27,7 @@ class RestaurantSeeder extends Seeder
         for ($i = 0; $i < 20; $i++) {
             $restaurant = new Restaurant();
             $restaurant->company_name = $companyNames[array_rand($companyNames)];
-            $restaurant->address = $faker->address;
+            $restaurant->company_name = $faker->address;
             $restaurant->vat_number = (string) $faker->randomNumber(5, true);
             $restaurant->telephone = $faker->unique()->phoneNumber;
             $restaurant->description = $faker->text; 
