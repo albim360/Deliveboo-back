@@ -13,7 +13,7 @@
     
                 @forelse ($restaurants as $restaurant)
                 
-                    <p>{{$project->id}}</p>
+                    <p>{{$restaurant->id}}</p>
                     <p><a href="{{route('restaurants.show',$restaurant)}}">{{$restaurant->company_name}}</a></p>
                     <p>{{$restaurant->address}}</p>
                     <p>{{$restaurant->description}}</p>
@@ -40,8 +40,8 @@
                         
                     
                     <botton>
-                        @if($project->trashed())
-                            <form action="{{ route('restaurants.restore',$project) }}" method="POST">
+                        @if($restaurant->trashed())
+                            <form action="{{ route('restaurants.restore',$restaurant) }}" method="POST">
                                 @csrf
                                 <input class="btn btn-sm btn-success" type="submit" value="Ripristina">
                             </form>
