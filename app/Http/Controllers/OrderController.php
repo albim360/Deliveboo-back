@@ -39,6 +39,7 @@ class OrderController extends Controller
         $data = $request->validated();
 
         $Order = order::create($data);    
+        $data['slug'] = Str::slug($data['full_name)']);
 
         return to_route('orders.show', $order);
     }
@@ -76,6 +77,7 @@ class OrderController extends Controller
     {
         $data = $request->validated();
         $order->update($data);
+        $data['slug'] = Str::slug($data['full_name)']);
         return to_route('orders.show', $order);
     }
     

@@ -6,6 +6,7 @@ use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 use Faker\Generator as Faker;
 
 class OrderSeeder extends Seeder
@@ -26,6 +27,7 @@ class OrderSeeder extends Seeder
             $new_order->telephone = $faker->phoneNumber();
             $new_order->address = $faker->address();
             $new_order->email = $faker->email();
+            $new_order->slug = Str::slug($new_order->full_name, '_');
 
             $new_order->save();
             $product = Product::Find(1);
