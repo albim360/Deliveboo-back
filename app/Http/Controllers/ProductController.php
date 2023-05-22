@@ -1,12 +1,13 @@
 <?php
 
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
-use Illuminate\validation\Rule;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Str;
 class ProductController extends Controller
 {
