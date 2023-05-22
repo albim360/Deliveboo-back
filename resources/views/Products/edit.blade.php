@@ -5,47 +5,27 @@
     
 
   <div class="container">
-      <form action="{{ route('restaurants.update',$restaurant) }}" method="POST">
+      <form action="{{ route('producuts.update',$product)t }}" method="POST">
   
           @csrf
           @method('PUT')
     
           <div class="mb-3">
-            <label for="company_name" class="form-label">name company</label>
-            <input type="text" class="form-control @error('company_name') is-invalid @enderror" id="company_name" name="company_name" value="{{ old('company_name',$restaurant->company_name) }}">
-            @error('company_name')
+            <label for="name" class="form-label">name</label>
+            <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name',$product->name) }}">
+            @error('name')
               <div class="invalid-feedback">
                   {{ $message }}
               </div>
             @enderror
           </div>
 
-          <div class="mb-3">
-              <label for="typologies" class="form-label">typologies</label>
-              <div class="d-flex @error('typologies') is-invalid @enderror flex-wrap gap-3">
-
-                @foreach($typologies as $key => $typology)
-                  <div class="form-check">
-                    <input name="typologies[]" @checked( in_array($technology->id, old('typologies',$restaurant->getTechnologyIds()) ) ) class="form-check-input" type="checkbox" value="{{ $typology->id }}" id="flexCheckDefault">
-                    <label class="form-check-label" for="flexCheckDefault">
-                      {{ $typology->category_kitchen }}
-                    </label>
-                  </div>
-                @endforeach
-              </div>
-
-              @error('technologies')
-                <div class="invalid-feedback">
-                    {{ $message }}
-                </div>
-              @enderror
-            </div>
   
           
     
           <div class="mb-3">
             <label for="description" class="form-label">description</label>
-            <input type="text" class="form-control @error('description') is-invalid @enderror" id="description" name="description" value="{{ old('description',$project->description) }}">
+            <input type="text" class="form-control @error('description') is-invalid @enderror" id="description" name="description" value="{{ old('description',$product->description) }}">
             @error('description')
               <div class="invalid-feedback">
                   {{ $message }}
@@ -57,33 +37,15 @@
           
     
           <div class="mb-3">
-            <label for="vat_number" class="form-label">vat_number </label>
-            <input type="text" class="form-control @error('vat_number') is-invalid @enderror" id="vat_number" name="vat_number" value="{{ old('vat_number',$restaurant->vat_number) }}">
-            @error('vat_number')
+            <label for="price" class="form-label">price </label>
+            <input type="text" class="form-control @error('price') is-invalid @enderror" id="price" name="price" value="{{ old('price',$product->price) }}">
+            @error('price')
               <div class="invalid-feedback">
                   {{ $message }}
               </div>
             @enderror
           </div>
-          <div class="mb-3">
-            <label for="address" class="form-label">address</label>
-            <input type="text" class="form-control @error('address') is-invalid @enderror" id="address" name="address" value="{{ old('address',$restaurant->address) }}">
-            @error('address')
-                <div class="invalid-feedback">
-                    {{ $message }}
-                </div>
-            @enderror
-          </div>
-    
-          <div class="mb-3">
-            <label for="telephone" class="form-label">telephone</label>
-            <input type="number" class="form-control @error('telephone) is-invalid @enderror" id="telephone" name="telephone" value="{{ old('telephone',$restaurant->telephone) }}">
-            @error('telephone')
-              <div class="invalid-feedback">
-                  {{ $message }}
-              </div>
-            @enderror
-          </div>
+
          
           <div class="mb-3">
             
