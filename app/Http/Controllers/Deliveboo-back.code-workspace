@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"path": "../../.."
+		},
+		{
+			"path": "../../../../../../laravel-many-to-many/routes"
+		}
+	],
+	"settings": {}
+}
