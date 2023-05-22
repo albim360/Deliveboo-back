@@ -19,6 +19,7 @@ class RestaurantController extends Controller
     public function index()
     {
         $restaurants = Restaurant::withTrashed()->get();
+        $user_id = Auth::id();
 
         return view('restaurants.index', compact('restaurants'));
     }
@@ -44,6 +45,7 @@ class RestaurantController extends Controller
     {
         $data = $request->validated();
         $data['slug'] = Str::slug($data['company_name']);
+        $data ['user_id']= Auth::id();
 
         $restaurant = Restaurant::create($data);
 

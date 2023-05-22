@@ -21,12 +21,12 @@
           </div>
 
           <div class="mb-3">
-              <label for="typologies" class="form-label">typologies</label>
+              <label for="typology" class="form-label">typologies</label>
               <div class="d-flex @error('typologies') is-invalid @enderror flex-wrap gap-3">
 
                 @foreach($typologies as $key => $typology)
                   <div class="form-check">
-                    <input name="typologies[]" @checked( in_array($technology->id, old('typologies',$restaurant->getTechnologyIds()) ) ) class="form-check-input" type="checkbox" value="{{ $typology->id }}" id="flexCheckDefault">
+                    <input name="typologies[]" @checked( in_array($typology->id, old('typologies',$restaurant->getTypologyIds()) ) ) class="form-check-input" type="checkbox" value="{{ $typology->id }}" id="flexCheckDefault">
                     <label class="form-check-label" for="flexCheckDefault">
                       {{ $typology->category_kitchen }}
                     </label>
@@ -34,7 +34,7 @@
                 @endforeach
               </div>
 
-              @error('technologies')
+              @error('typologies')
                 <div class="invalid-feedback">
                     {{ $message }}
                 </div>
