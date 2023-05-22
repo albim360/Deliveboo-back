@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\restaurant;
+use App\Models\Typology;
+use App\Models\Restaurant;
 use App\Http\Requests\StorerestaurantRequest;
 use App\Http\Requests\UpdaterestaurantRequest;
-use Illuminate\validation\Rule;
 use Illuminate\Support\Str;
+
 class RestaurantController extends Controller
 {
     /**
@@ -17,7 +18,7 @@ class RestaurantController extends Controller
      */
     public function index()
     {
-        $restaurants = restaurant::withTrashed()->get();
+        $restaurants = Restaurant::withTrashed()->get();
 
         return view('restaurants.index', compact('restaurants'));
     }
@@ -29,43 +30,44 @@ class RestaurantController extends Controller
      */
     public function create()
     {
-        return view('restaurants.create',compact('restaurants'));
+        $typologies = Typology::all();
+    
+        return view('restaurants.create', compact('typologies'));
     }
-
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreProductRequest $request)
+    public function store(StorerestaurantRequest $request)
     {
         $data = $request->validated();
-
-        $restaurant = restaurant::create($data);    
         $data['slug'] = Str::slug($data['company_name']);
 
-        return to_route('restaurants.show', $restaurant);
+        $restaurant = Restaurant::create($data);
+
+        return redirect()->route('restaurants.show', $restaurant);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Restaurant  $restaurant
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function show(Restaurant $restaurant)
     {
-        return view('restaurants.show',compact('restaurant'));
+        return view('restaurants.show', compact('restaurant'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Restaurant  $restaurant
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product)
+    public function edit(Restaurant $restaurant)
     {
         return view('restaurants.edit', compact('restaurant'));
     }
@@ -74,32 +76,33 @@ class RestaurantController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Restaurant  $restaurant
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(UpdaterestaurantRequest $request, Restaurant $restaurant)
     {
         $data = $request->validated();
-        $restaurant->update($data);
         $data['slug'] = Str::slug($data['company_name']);
-        return to_route('restaurants.show', $restaurant);
+
+        $restaurant->update($data);
+
+        return redirect()->route('restaurants.show', $restaurant);
     }
-    
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Restaurant  $restaurant
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy(Restaurant $restaurant)
     {
         if ($restaurant->trashed()) {
-            $restaurant->forceDelete(); 
+            $restaurant->forceDelete();
         } else {
-            $restaurant->delete(); 
+            $restaurant->delete();
         }
 
-        return to_route('restaurants.index');
+        return redirect()->route('restaurants.index');
     }
 }
