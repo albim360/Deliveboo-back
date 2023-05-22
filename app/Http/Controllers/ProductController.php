@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Typology;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use Illuminate\Validation\Rule;
@@ -30,9 +31,10 @@ class ProductController extends Controller
      */
     public function create()
     {
+        $typologies = Typology::all();
         $products = Product::all(); 
     
-        return view('products.create', compact('products'));
+        return view('products.create', compact('products','typologies'));
     }
     
 
@@ -45,9 +47,9 @@ class ProductController extends Controller
     public function store(StoreProductRequest $request)
     {
         $data = $request->validated();
-
-        $product = Product::create($data);    
         $data['slug'] = Str::slug($data['name']);
+        $product = Product::create($data);    
+        
 
         return to_route('products.show', $product);
     }
@@ -81,7 +83,7 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(UpdateProductRequest $request, Product $product)
     {
         $data = $request->validated();
         $product->update($data);

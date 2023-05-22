@@ -18,9 +18,9 @@ class TypologyController extends Controller
      */
     public function index()
     {
-        $typologies = Typology::withTrashed()->get();
+        // // $typologies = Typology::withTrashed()->get();
 
-        return view('typologies.index', compact('typologies'));
+        // // return view('typologies.index', compact('typologies'));
     }
 
     /**
@@ -30,7 +30,7 @@ class TypologyController extends Controller
      */
     public function create()
     {
-        return view('typologies.create',compact('typologies'));
+        // return view('typologies.create',compact('typologies'));
     }
 
     /**
@@ -41,64 +41,64 @@ class TypologyController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->validated();
+        // $data = $request->validated();
 
-        $typology = Typology::create($data);    
+        // $typology = Typology::create($data);    
 
-        return to_route('typologies.show', $typology);
+        // return to_route('typologies.show', $typology);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * v@param  \App\Models\Typology
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Typology $typology)
     {
-        return view('typologies.show',compact('typology'));
+        // return view('typologies.show',compact('typology'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     *@param  \App\Models\Typology
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Typology $typology)
     {
-        return view('typologies.edit', compact('typology'));
+        // return view('typologies.edit', compact('typology'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Typology
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        $data = $request->validated();
-        $typology->update($data);
-        return to_route('typologies.show', $typology);
+        // $data = $request->validated();
+        // $typology->update($data);
+        // return to_route('typologies.show', $typology);
     }
     
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Typology
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Typology $typology)
     {
-        if ($product->trashed()) {
-            $product->forceDelete(); 
-        } else {
-            $product->delete(); 
-        }
+        // if ($product->trashed()) {
+        //     $product->forceDelete(); 
+        // } else {
+        //     $product->delete(); 
+        // }
 
-        return to_route('typologies.index');
+        // return to_route('typologies.index');
     }
 }

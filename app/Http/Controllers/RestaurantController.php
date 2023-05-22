@@ -7,6 +7,7 @@ use App\Models\Typology;
 use App\Models\Restaurant;
 use App\Http\Requests\StorerestaurantRequest;
 use App\Http\Requests\UpdaterestaurantRequest;
+use Illuminate\Support\facades\Auth;
 use Illuminate\Support\Str;
 
 class RestaurantController extends Controller
@@ -19,6 +20,7 @@ class RestaurantController extends Controller
     public function index()
     {
         $restaurants = Restaurant::withTrashed()->get();
+        $user_id = Auth::id();
 
         return view('restaurants.index', compact('restaurants'));
     }
@@ -44,6 +46,7 @@ class RestaurantController extends Controller
     {
         $data = $request->validated();
         $data['slug'] = Str::slug($data['company_name']);
+        $data ['user_id']= Auth::id();
 
         $restaurant = Restaurant::create($data);
 
