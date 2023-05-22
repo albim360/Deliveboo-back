@@ -30,8 +30,11 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('products.create',compact('products'));
+        $products = Product::all(); 
+    
+        return view('products.create', compact('products'));
     }
+    
 
     /**
      * Store a newly created resource in storage.
