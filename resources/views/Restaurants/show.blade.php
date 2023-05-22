@@ -5,7 +5,7 @@
     
 <div class="container">
     <div class="d-flex">
-        <div >
+        <div>
             <h1 class="title">{{$restaurant->company_name}}
                 @if($restaurant->type)
                 <span class="badge rounded-pill bg-warning">{{ $restaurant->typology->compan_name }}</span>
