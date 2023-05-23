@@ -21,14 +21,17 @@ class RestaurantSeeder extends Seeder
         
         
         $productIds = Product::pluck('id')->all();
-        $typology_Ids = Typology::pluck('id')->all();
+        $typology_Ids = Typology::all()->pluck('id')->all();
+        
         $companyNames = ['Zia Restaurant ','daGorini',' Marotta Ristorante',' Dina','Condividere',' L’Argine a Vencò','Ristorante Villa Maiella','Antica Osteria Nonna Rosa','Gambero Rosso','Colline Ciociare','Abocar Due Cucine','Re Santi e Leoni','Oasis Sapori Antichi','Dalla Gioconda'];
 
-        for ($i = 0; $i < 20; $i++) {
+        foreach ($companyNames as $companyName) {
+
             $restaurant = new Restaurant();
-            $restaurant->company_name = $companyNames[array_rand($companyNames)];
+
+            $restaurant->company_name = $companyName;
             $restaurant->address = $faker->address;
-            $restaurant->vat_number = (string) $faker->randomNumber(5, true);
+            $restaurant->vat_number = mt_rand(10000000000, 99999999999);
             $restaurant->telephone = $faker->unique()->phoneNumber;
             $restaurant->description = $faker->text; 
             $restaurant->slug = Str::slug($restaurant->company_name, '_');

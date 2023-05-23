@@ -11,7 +11,6 @@
       <form action="{{ route('products.store') }}" method="POST">
   
           @csrf
-          
     
           <div class="mb-3">
             <label for="name" class="form-label">Titolo</label>
@@ -23,8 +22,6 @@
             @enderror
           </div>
           
-          
-    
           <div class="mb-3">
             <label for="description" class="form-label">description</label>
             <input type="text" class="form-control @error('description') is-invalid @enderror" id="description" name="description" value="{{ old('description') }}">
@@ -34,9 +31,7 @@
                 </div>
             @enderror
           </div>
-    
-          
-    
+
           <div class="mb-3">
             <label for="price" class="form-label">price</label>
             <input type="text" class="form-control @error('price') is-invalid @enderror" id="price" name="price" value="{{ old('price') }}">

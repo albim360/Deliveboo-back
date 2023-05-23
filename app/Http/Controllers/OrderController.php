@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Order;
 
 class OrderController extends Controller
 {
@@ -13,9 +14,9 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = order::withTrashed()->get();
+        $orders = Order::get();
 
-        return view('orders.index', compact('orders'));
+        return view('order.index', compact('orders'));
     }
 
     /**
@@ -25,7 +26,7 @@ class OrderController extends Controller
      */
     public function create()
     {
-        return view('orders.create',compact('orders'));
+        return view('order.create',compact('orders'));
     }
 
     /**
@@ -41,7 +42,7 @@ class OrderController extends Controller
         $Order = order::create($data);    
         
 
-        return to_route('orders.show', $order);
+        return to_route('order.show', $order);
     }
 
     /**
@@ -52,7 +53,7 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        return view('orders.show',compact('order'));
+        return view('order.show',compact('order'));
     }
 
     /**
@@ -63,7 +64,7 @@ class OrderController extends Controller
      */
     public function edit($id)
     {
-        return view('orders.edit', compact('order'));
+        return view('order.edit', compact('order'));
     }
 
     /**
@@ -78,7 +79,7 @@ class OrderController extends Controller
         $data = $request->validated();
         $order->update($data);
         
-        return to_route('orders.show', $order);
+        return to_route('order.show', $order);
     }
     
 
@@ -96,6 +97,6 @@ class OrderController extends Controller
             $product->delete(); 
         }
 
-        return to_route('products.index');
+        return to_route('order.index');
     }
 }

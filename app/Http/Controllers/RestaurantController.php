@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Typology;
 use App\Models\Restaurant;
 use App\Http\Requests\StoreRestaurantRequest;
 use App\Http\Requests\UpdateRestaurantRequest;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+
 
 class RestaurantController extends Controller
 {
@@ -16,11 +18,11 @@ class RestaurantController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $restaurants = Restaurant::withTrashed()->get();
+        $restaurants = Restaurant::with('typologies')->get();
         $user_id = Auth::id();
-
+        
         return view('restaurants.index', compact('restaurants'));
     }
 
@@ -32,7 +34,7 @@ class RestaurantController extends Controller
     public function create()
     {
         $typologies = Typology::all();
-
+     
         return view('restaurants.create', compact('typologies'));
     }
     /**
@@ -41,7 +43,7 @@ class RestaurantController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StorerestaurantRequest $request)
+    public function store(StoreRestaurantRequest $request)
     {
         $data = $request->validated();
         $data['slug'] = Str::slug($data['company_name']);
@@ -49,9 +51,11 @@ class RestaurantController extends Controller
 
         $restaurant = Restaurant::create($data);
 
-        //se al ristorante è collegata una tipologia attaccala
-        if (isset($data['tipologies'])) {
-            $restaurant->tipologies()->attach($data['tipologies']);
+       
+        if (isset($data['typologies'])) {
+
+            $restaurant->typologies()->attach($data['typologies']);
+
         }
 
         return redirect()->route('restaurants.show', $restaurant);
@@ -76,10 +80,13 @@ class RestaurantController extends Controller
      */
     public function edit(Restaurant $restaurant)
     {
+
         $typologies = Typology::all(); //prendo typologies
 
         return view('restaurants.edit', compact('restaurant,typologies'));
+
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -88,19 +95,26 @@ class RestaurantController extends Controller
      * @param  \App\Models\Restaurant  $restaurant
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdaterestaurantRequest $request, Restaurant $restaurant)
+    public function update(UpdateRestaurantRequest $request, Restaurant $restaurant)
     {
         $data = $request->validated();
-        $data['slug'] = Str::slug($data['company_name']);
+
+        if ($data['company_name'] !== $restaurant->company_name) {
+
+            $data['slug'] = Str::slug($data['company_name']);
+        };
 
         $restaurant->update($data);
 
-        //aggiorno le tipologie se ci sono
+     
         if (isset($data['typologies'])) {
+
             $restaurant->typologies()->sync($data['typologies']);
-        }else{
+
+        } else {
+
             $restaurant->typologies()->sync([]);
-            //alternativa usare detach()
+
         }
 
         return redirect()->route('restaurants.show', $restaurant);
