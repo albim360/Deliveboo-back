@@ -37,13 +37,25 @@ Route::middleware('auth')->group(function () {
         'products' =>'product:slug'
     ])->withTrashed(['show', 'edit', 'update', 'destroy']);
 
-    Route::resource('orders', ProductController::class)->parameters([
+    Route::resource('orders', OrderController::class)->parameters([
         'orders' =>'order'
     ])->withTrashed(['show', 'edit', 'update', 'destroy']);
    
     Route::resource('restaurants', RestaurantController::class)->parameters([
         'restaurants' =>'restaurant:slug'
     ])->withTrashed(['show', 'edit', 'update', 'destroy']);
+
+    Route::post('/password/check', function () {
+        $password = request('password');
+        $passwordConfirmation = request('password_confirmation');
+    
+        if ($password !== $passwordConfirmation) {
+            return response()->json(['message' => 'Le password non corrispondono.'], 422);
+        }
+    
+        return response()->json(['message' => 'Le password corrispondono.'], 200);
+    })->name('password.check');
+    
 });
 
 require __DIR__.'/auth.php';

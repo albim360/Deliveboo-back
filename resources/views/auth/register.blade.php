@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                    <form id="register-form" method="POST" action="{{ route('register') }}">
                         @csrf
 
                         <div class="mb-4 row">
@@ -58,12 +58,13 @@
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                <span id="password-error" style="color: red;"></span>
                             </div>
                         </div>
 
                         <div class="mb-4 row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="button" class="btn btn-primary" id="register-button">
                                     {{ __('Register') }}
                                 </button>
                             </div>
@@ -74,4 +75,26 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('#register-button').click(function(e) {
+            e.preventDefault();
+
+            var password = $('#password').val();
+            var passwordConfirmation = $('#password-confirm').val();
+
+            if (password !== passwordConfirmation) {
+                $('#password-error').text('Le password non corrispondono.');
+                return false;
+            }
+
+            $('#register-form').submit();
+        });
+    });
+</script>
 @endsection
