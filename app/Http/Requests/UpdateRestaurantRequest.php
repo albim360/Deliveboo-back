@@ -36,8 +36,7 @@ class UpdateRestaurantRequest extends FormRequest
             'telephone' => 'required|min:10|max:15|unique:restaurants,telephone',
             'description'=>'nullable|string',
             'image'=>'nullable|url',
-            'product_id' => 'nullable|exists:products,id',
-            'typologies' => 'exists:typologies,id'
+            
         ];
     }
 }

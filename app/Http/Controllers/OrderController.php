@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Order;
-
+use App\Http\Requests\StoreOrderRequest;
 class OrderController extends Controller
 {
     /**
@@ -26,8 +26,9 @@ class OrderController extends Controller
      */
     public function create()
     {
-        return view('order.create',compact('orders'));
+        return view('order.create');
     }
+    
 
     /**
      * Store a newly created resource in storage.
@@ -35,14 +36,13 @@ class OrderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreOrderRequest $request)
     {
         $data = $request->validated();
-
-        $Order = order::create($data);    
-        
-
-        return to_route('order.show', $order);
+    
+        $order = Order::create($data);
+    
+        return to_route('orders.show', $order);
     }
 
     /**
@@ -51,9 +51,11 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Order $order)
     {
-        return view('order.show',compact('order'));
+   
+
+    return view('order.show', compact('order'));
     }
 
     /**
@@ -62,7 +64,7 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Order $order)
     {
         return view('order.edit', compact('order'));
     }
@@ -74,7 +76,7 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Order $order)
     {
         $data = $request->validated();
         $order->update($data);
