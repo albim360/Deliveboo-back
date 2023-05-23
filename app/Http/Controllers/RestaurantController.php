@@ -51,9 +51,11 @@ class RestaurantController extends Controller
 
         $restaurant = Restaurant::create($data);
 
+       
         if (isset($data['typologies'])) {
 
             $restaurant->typologies()->attach($data['typologies']);
+
         }
 
         return redirect()->route('restaurants.show', $restaurant);
@@ -78,13 +80,11 @@ class RestaurantController extends Controller
      */
     public function edit(Restaurant $restaurant)
     {
-        $typologies = Typology::all();
 
-        // $selectedTypologies = $restaurant->typologies->pluck('id')->toArray();
+        $typologies = Typology::all(); //prendo typologies
 
-        // 'selectedTypologies'
+        return view('restaurants.edit', compact('restaurant,typologies'));
 
-        return view('restaurants.edit', compact('restaurant', 'typologies')); 
     }
 
 
@@ -106,6 +106,7 @@ class RestaurantController extends Controller
 
         $restaurant->update($data);
 
+     
         if (isset($data['typologies'])) {
 
             $restaurant->typologies()->sync($data['typologies']);
@@ -113,20 +114,36 @@ class RestaurantController extends Controller
         } else {
 
             $restaurant->typologies()->sync([]);
+
         }
 
         return redirect()->route('restaurants.show', $restaurant);
     }
 
+    //funzione per ripristinare
+    public function restore(Request $request, Restaurant $restaurant)
+    {
+
+        if ($restaurant->trashed()) {
+            $restaurant->restore();
+
+            $restaurant->session()->flash('message', 'Il ristorante è stato ripristinato.');
+        }
+
+        return back();
+    }
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Restaurant  $restaurant
      * @return \Illuminate\Http\Response
      */
+    
     public function destroy(Restaurant $restaurant)
     {
         if ($restaurant->trashed()) {
+            $restaurant->typologies()->detach(); //elimino i collegamenti con la tabella ponte. Alternativa sulla migration modificare restric
+            //forse va eliminato anche il collegamento con products
             $restaurant->forceDelete();
         } else {
             $restaurant->delete();
