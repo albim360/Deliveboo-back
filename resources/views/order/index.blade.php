@@ -4,10 +4,10 @@
 <div class="container">
     <div>
         <h1>
-            i prodotti
+         Ordine
         </h1>
         <div>
-            <a class="btn" href="{{route('orders.create')}}">Nuovo prodotto</a>
+            <a class="btn" href="{{route('orders.create')}}">crea un nuovo ordine  </a>
         </div>
     </div>
     
