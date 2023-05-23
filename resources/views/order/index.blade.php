@@ -4,10 +4,10 @@
 <div class="container">
     <div>
         <h1>
-         Ordine
+            ordini
         </h1>
         <div>
-            <a class="btn" href="{{route('orders.create')}}">crea un nuovo ordine  </a>
+            <a class="btn" href="{{route('orders.create')}}">Nuovo ordine</a>
         </div>
     </div>
     
@@ -22,11 +22,19 @@
                     <p>{{$order->telephone}}</p> 
                     <p>{{$order->address}}</p> 
                     <p>{{$order->email}}</p> 
-                @empty
+                    <p>
+                        {{ $order->trashed() ? $order->deleted_at : '' }} 
+                    </p>
+                
+                
+                @empty 
+                
+                    <p>Vuoto</p>
+                
                 @endforelse
-            
+            </tbody>
 
-        
+        </table>
 
     </div>
 

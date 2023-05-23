@@ -20,7 +20,7 @@ class RestaurantSeeder extends Seeder
     {
         
         
-        $productIds = Product::pluck('id')->all();
+        //$productIds = Product::pluck('id')->all();
         $typology_Ids = Typology::all()->pluck('id')->all();
         
         $companyNames = ['Zia Restaurant ','daGorini',' Marotta Ristorante',' Dina','Condividere',' L’Argine a Vencò','Ristorante Villa Maiella','Antica Osteria Nonna Rosa','Gambero Rosso','Colline Ciociare','Abocar Due Cucine','Re Santi e Leoni','Oasis Sapori Antichi','Dalla Gioconda'];
@@ -36,7 +36,7 @@ class RestaurantSeeder extends Seeder
             $restaurant->description = $faker->text; 
             $restaurant->slug = Str::slug($restaurant->company_name, '_');
            
-            $restaurant->product_id = $faker->randomElement($productIds);
+            //$restaurant->product_id = $faker->randomElement($productIds);
             $restaurant->save();
 
             $restaurant->typologies()->attach($faker->randomElement($typology_Ids, $faker->numberBetween(1, 2)));

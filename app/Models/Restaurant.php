@@ -20,7 +20,7 @@ class Restaurant extends Model
         'telephone',
         'description',
         'slug',
-        'product_id',
+        //'product_id', eliminato
     ];
 
     public function typologies()
@@ -30,7 +30,9 @@ class Restaurant extends Model
 
     public function product()
     {
-        return $this->belongsTo(Product::class);
+        //return $this->belongsTo(Product::class);
+        
+        return $this->hasMany(Product::class); //questo ristorante ha molti prodotti
     }
 
     public function getTypologyIds()
