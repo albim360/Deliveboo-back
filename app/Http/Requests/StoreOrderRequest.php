@@ -32,4 +32,5 @@ class StoreOrderRequest extends FormRequest
             'email' => 'email',
         ];
     }
+    
 }
