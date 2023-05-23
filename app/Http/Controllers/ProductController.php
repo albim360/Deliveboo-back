@@ -10,6 +10,7 @@ use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 class ProductController extends Controller
 {
     /**
@@ -47,9 +48,12 @@ class ProductController extends Controller
     public function store(StoreProductRequest $request)
     {
         $data = $request->validated();
+
         $data['slug'] = Str::slug($data['name']);
-        $product = Product::create($data);    
-        
+        $data['user_id'] = Auth::id();
+
+        // dd($data);
+        $product = Product::create($data);   
 
         return to_route('products.show', $product);
     }

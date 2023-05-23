@@ -37,7 +37,7 @@ Route::middleware('auth')->group(function () {
         'products' =>'product:slug'
     ])->withTrashed(['show', 'edit', 'update', 'destroy']);
 
-    Route::resource('orders', ProductController::class)->parameters([
+    Route::resource('orders',OrderController::class)->parameters([
         'orders' =>'order'
     ])->withTrashed(['show', 'edit', 'update', 'destroy']);
    

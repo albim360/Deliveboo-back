@@ -4,10 +4,10 @@
 <div class="container">
     <div>
         <h1>
-            i prodotti
+            ordini
         </h1>
         <div>
-            <a class="btn" href="{{route('orders.create')}}">Nuovo prodotto</a>
+            <a class="btn" href="{{route('orders.create')}}">Nuovo ordine</a>
         </div>
     </div>
     
@@ -23,31 +23,9 @@
                     <p>{{$order->address}}</p> 
                     <p>{{$order->email}}</p> 
                     <p>
-                        {{ $order->trashed() ? $order->deleted_at : '' }}
+                        {{ $order->trashed() ? $order->deleted_at : '' }} 
                     </p>
-                    <botton>
-                        <a class="btn " href="{{route('orders.edit',$order)}}">MODIFICA</a>
-                        
-                    </botton>
-                    <botton>
-                        <form action="{{ route('orders.destroy', $order) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <input class="btn" type="submit" value="ELIMINA">
-                        </form>
-                        
-                    </botton>
-                    
-                        
-                    
-                    <botton>
-                        @if($project->trashed())
-                            <form action="{{ route('orders.restore',$project) }}" method="POST">
-                                @csrf
-                                <input class="btn btn-sm btn-success" type="submit" value="Ripristina">
-                            </form>
-                        @endif
-                    </botton>
+                
                 
                 @empty 
                 
