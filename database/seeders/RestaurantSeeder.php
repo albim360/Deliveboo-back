@@ -36,7 +36,7 @@ class RestaurantSeeder extends Seeder
             $restaurant->description = $faker->text; 
             $restaurant->slug = Str::slug($restaurant->company_name, '_');
            
-            //$restaurant->product_id = $faker->randomElement($productIds);
+            // $restaurant->product_id = $faker->randomElement($productIds);
             $restaurant->save();
 
             $restaurant->typologies()->attach($faker->randomElement($typology_Ids, $faker->numberBetween(1, 2)));
