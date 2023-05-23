@@ -20,6 +20,7 @@ class Restaurant extends Model
         'telephone',
         'description',
         'slug',
+        'user_id'
         //'product_id', eliminato
     ];
 
