@@ -13,15 +13,7 @@
             <p class="email">{{$order->email}}</p>
             <p class="date">{{$order->date}}</p>
         </div>
-        <div>
-            <a class="btn" href="{{route('$orders.edit',$order)}}">MODIFICA</a>
-            @if($order->trashed())
-                    <form action="{{ route('$orders.restore',$order) }}" method="POST">
-                        @csrf
-                        <input class="btn btn-sm btn-success" type="submit" value="Ripristina">
-                    </form>
-                @endif
-        </div>
+        
 
     </div>
     
