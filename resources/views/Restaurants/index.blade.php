@@ -11,8 +11,10 @@
         </div>
     </div>
     
+                {{-- @dd($restaurants); --}}
                 @forelse ($restaurants as $restaurant)
-                
+
+                    {{-- @dd($restaurants); --}}
                     <p>{{$restaurant->id}}</p>
                     <p><a href="{{route('restaurants.show',$restaurant)}}">{{$restaurant->company_name}}</a></p>
                     <p>{{$restaurant->address}}</p>
@@ -21,32 +23,22 @@
                     <p>{{$restaurant->telephone}}</p>
                     
                     <p>
-                        {{ $restaurant->trashed() ? $restaurant->deleted_at : '' }}
+                        {{-- {{ $restaurant->trashed() ? $restaurant->deleted_at : '' }} --}}
                     </p>
-                    <p> {{ $restaurant->typology ? $restaurant->typology->category_kitchen : '-' }} </p>
-                    <botton>
-                        <a class="btn " href="{{route('restaurants.edit',$restaurant)}}">MODIFICA</a>
-                        
-                    </botton>
-                    <botton>
-                        <form action="{{ route('restaurants.destroy', $restaurant) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <input class="btn" type="submit" value="ELIMINA">
-                        </form>
-                        
-                    </botton>
+                    
+                    <p>
+                        @forelse ($restaurant->typologies as $typology)
+                        <span>{{$typology->category_kitchen}}</span>
+                        @empty
+                        <span>-</span>
+                        @endforelse
+                    </p>
+                    
+
                     
                         
                     
-                    <botton>
-                        @if($restaurant->trashed())
-                            <form action="{{ route('restaurants.restore',$restaurant) }}" method="POST">
-                                @csrf
-                                <input class="btn btn-sm btn-success" type="submit" value="Ripristina">
-                            </form>
-                        @endif
-                    </botton>
+                    
                 
                 @empty 
                 

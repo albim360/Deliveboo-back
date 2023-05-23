@@ -38,6 +38,7 @@ Route::middleware('auth')->group(function () {
     ])->withTrashed(['show', 'edit', 'update', 'destroy']);
 
     Route::resource('orders', OrderController::class)->parameters([
+
         'orders' =>'order'
     ])->withTrashed(['show', 'edit', 'update', 'destroy']);
    

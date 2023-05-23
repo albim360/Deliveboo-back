@@ -45,7 +45,7 @@
     
           <div class="mb-3">
             <label for="description" class="form-label">description</label>
-            <input type="text" class="form-control @error('description') is-invalid @enderror" id="description" name="description" value="{{ old('description',$project->description) }}">
+            <input type="text" class="form-control @error('description') is-invalid @enderror" id="description" name="description" value="{{ old('description',$restaurant->description) }}">
             @error('description')
               <div class="invalid-feedback">
                   {{ $message }}
