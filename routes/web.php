@@ -37,6 +37,9 @@ Route::middleware('auth')->group(function () {
         'products' =>'product:slug'
     ])->withTrashed(['show', 'edit', 'update', 'destroy']);
 
+    Route::post('register/with/restaurant', [RestaurantController::class, 'registerWithRestaurant'])->name('register.with.restaurant');
+
+
     Route::resource('orders', OrderController::class)->parameters([
 
         'orders' =>'order'
