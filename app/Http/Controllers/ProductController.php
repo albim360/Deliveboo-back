@@ -11,6 +11,7 @@ use App\Http\Requests\UpdateProductRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
+
 class ProductController extends Controller
 {
     /**
@@ -20,7 +21,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::withTrashed()->get();
+        $user = Auth::user();
+        $products = Product::where('restaurant_id', $user->restaurant_id)->withTrashed()->get();
 
         return view('products.index', compact('products'));
     }
@@ -33,11 +35,10 @@ class ProductController extends Controller
     public function create()
     {
         $typologies = Typology::all();
-        $products = Product::all(); 
-    
-        return view('products.create', compact('products','typologies'));
+        $products = Product::where('restaurant_id', Auth::user()->restaurant_id)->get();
+
+        return view('products.create', compact('products', 'typologies'));
     }
-    
 
     /**
      * Store a newly created resource in storage.
@@ -48,14 +49,12 @@ class ProductController extends Controller
     public function store(StoreProductRequest $request)
     {
         $data = $request->validated();
-
         $data['slug'] = Str::slug($data['name']);
-        $data['user_id'] = Auth::id();
+        $data['restaurant_id'] = Auth::user()->restaurant_id;
 
-        // dd($data);
-        $product = Product::create($data);   
+        $product = Product::create($data);
 
-        return to_route('products.show', $product);
+        return redirect()->route('products.show', $product);
     }
 
     /**
@@ -66,7 +65,11 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        return view('products.show',compact('product'));
+        if ($product->restaurant_id !== Auth::user()->restaurant_id) {
+            abort(403); // Unauthorized access
+        }
+
+        return view('products.show', compact('product'));
     }
 
     /**
@@ -77,6 +80,10 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
+        if ($product->restaurant_id !== Auth::user()->restaurant_id) {
+            abort(403); // Unauthorized access
+        }
+
         return view('products.edit', compact('product'));
     }
 
@@ -89,12 +96,16 @@ class ProductController extends Controller
      */
     public function update(UpdateProductRequest $request, Product $product)
     {
+        if ($product->restaurant_id !== Auth::user()->restaurant_id) {
+            abort(403); // Unauthorized access
+        }
+
         $data = $request->validated();
         $product->update($data);
         $data['slug'] = Str::slug($data['name']);
-        return to_route('products.show', $product);
+
+        return redirect()->route('products.show', $product);
     }
-    
 
     /**
      * Remove the specified resource from storage.
@@ -104,12 +115,18 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        if ($product->trashed()) {
-            $product->forceDelete(); 
-        } else {
-            $product->delete(); 
+        if ($product->restaurant_id !== Auth::user()->restaurant_id) {
+            abort(403); // Unauthorized access
         }
 
-        return to_route('products.index');
+        if ($product->trashed()) {
+            $product->forceDelete();
+        } else {
+            $product->delete();
+        }
+
+        return redirect()->route('products.index');
     }
 }
+
+
