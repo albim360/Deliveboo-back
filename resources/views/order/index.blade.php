@@ -22,6 +22,9 @@
                     <p>{{$order->telephone}}</p> 
                     <p>{{$order->address}}</p> 
                     <p>{{$order->email}}</p> 
+                    <p>
+                        {{ $order->trashed() ? $order->deleted_at : '' }} 
+                    </p>
                 
                 
                 @empty 
