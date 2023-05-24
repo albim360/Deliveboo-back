@@ -7,7 +7,6 @@
 </div>
 <div class="container">
     <form action="{{ route('orders.store') }}" method="POST">
-
         @csrf
         <div class="mb-3">
             <label for="full_name" class="form-label">name</label>
@@ -26,6 +25,37 @@
                 {{ $message }}
             </div>
             @enderror
+        </div>
+
+        <div class="mb-3">
+            <label for="telephone" class="form-label">telephone</label>
+            <input type="text" class="form-control @error('telephone') is-invalid @enderror" id="telephone" name="telephone" value="{{ old('telephone') }}">
+            @error('email')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+            @enderror
+        </div>
+
+        <div class="mb-3"> 
+            <label for="products" class="form-label">Product</label>
+            <div class="d-flex @error('products') is-invalid @enderror flex-wrap gap-3">
+
+                @foreach($products as $key => $product)
+                    <div class="form-check">
+                        <input name="products[]"
+                        @checked( in_array($product->id, old('products',[]) ) )
+                        class="form-check-input"
+                        type="checkbox"
+                        value="{{ $product->id }}" 
+                        id="flexCheckDefault"
+                        >
+                        <label class="form-check-label" for="flexCheckDefault">
+                            {{ $product->name }}
+                        </label>
+                    </div>
+                @endforeach
+            </div>
         </div>
 
         <div class="mb-3">
@@ -57,7 +87,6 @@
             </div>
             @enderror
         </div>
-
 
         <button type="submit" class="btn btn-primary">Salva</button>
     </form>

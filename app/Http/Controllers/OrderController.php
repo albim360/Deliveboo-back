@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Order;
+use App\Models\Product;
 use App\Http\Requests\StoreOrderRequest;
+use App\Http\Requests\UpdateOrderRequest;
 class OrderController extends Controller
 {
     /**
@@ -26,7 +28,9 @@ class OrderController extends Controller
      */
     public function create()
     {
-        return view('order.create');
+        $products = Product::orderBy('name', 'asc')->get();
+
+        return view('order.create', compact('products'));
     }
     
 
@@ -39,8 +43,12 @@ class OrderController extends Controller
     public function store(StoreOrderRequest $request)
     {
         $data = $request->validated();
-    
+        // dd($data);
         $order = Order::create($data);
+
+        if (isset($data['products'])) {
+            $order->products()->attach($data['products']);
+        }
     
         return to_route('orders.show', $order);
     }
@@ -53,9 +61,7 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-   
-
-    return view('order.show', compact('order'));
+        return view('order.show', compact('order'));
     }
 
     /**
@@ -80,6 +86,13 @@ class OrderController extends Controller
     {
         $data = $request->validated();
         $order->update($data);
+
+        if (isset($data['products'])) {
+            $order->products()->sync($data['products']);
+        }else{
+            $order->products()->sync([]);
+            //alternativa usare detach()
+        }
         
         return to_route('order.show', $order);
     }
