@@ -41,17 +41,24 @@ class OrderController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(StoreOrderRequest $request)
-    {
-        $data = $request->validated();
-        // dd($data);
-        $order = Order::create($data);
-
-        if (isset($data['products'])) {
-            $order->products()->attach($data['products']);
-        }
+{
+    $data = $request->validated();
+    $data['quantity'] = 1; // Imposta il valore predefinito di 'quantity' a 1
     
-        return to_route('orders.show', $order);
+    $order = Order::create($data);
+    
+    if (isset($data['products'])) {
+        $products = [];
+        foreach ($data['products'] as $product) {
+            $products[$product] = ['quantity' => $data['quantity']];
+        }
+        $order->products()->attach($products);
     }
+    
+    return redirect()->route('orders.show', $order);
+}
+
+
 
     /**
      * Display the specified resource.
