@@ -3,9 +3,7 @@
 @section('content')
     <div class="container">
         <div>
-            <h1>
-                i prodotti
-            </h1>
+            <h1>i prodotti</h1>
             <div>
                 <a class="btn" href="{{ route('products.create') }}">Nuovo prodotto</a>
             </div>
@@ -17,44 +15,32 @@
             <p>{{ $product->name }}</p>
             <p>{{ $product->description }}</p>
             <p>{{ $product->price }}</p>
-            <p>
-                {{ $product->trashed() ? $product->deleted_at : '' }}
-            </p>
-            <botton>
-                <a class="btn " href="{{ route('products.edit', $product) }}">MODIFICA</a>
-
-            </botton>
-            <botton>
+            <p>{{ $product->trashed() ? $product->deleted_at : '' }}</p>
+            <button>
+                <a class="btn" href="{{ route('products.edit', $product) }}">MODIFICA</a>
+            </button>
+            <button>
                 <form action="{{ route('products.destroy', $product) }}" method="POST">
                     @csrf
                     @method('DELETE')
                     <input class="btn" type="submit" value="ELIMINA">
                 </form>
-
-            </botton>
-
-            <botton>
+            </button>
+            <button>
                 @if ($product->trashed())
                     <form action="{{ route('products.restore', $product) }}" method="POST">
                         @csrf
                         <input class="btn btn-sm btn-success" type="submit" value="Ripristina">
                     </form>
                 @endif
-            </botton>
-            @if (request()->session()->exists('message'))
+            </button>
+            @if (session()->has('message'))
                 <div class="alert alert-primary" role="alert">
-                    {{ request()->session()->pull('message') }}
+                    {{ session('message') }}
                 </div>
             @endif
-
         @empty
             <p>Vuoto</p>
         @endforelse
-        </tbody>
-
-        </table>
-
-    </div>
-
     </div>
 @endsection

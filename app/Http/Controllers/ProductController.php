@@ -53,6 +53,24 @@ class ProductController extends Controller
         return redirect()->route('products.index')->with('success', 'Il prodotto è stato salvato con successo.');
     }
 
+    public function update(UpdateProductRequest $request, Product $product)
+    {
+        if ($product->restaurant_id !== Auth::user()->restaurant->id) {
+            abort(403); // Unauthorized access
+        }
+    
+        $data = $request->validated();
+        $data['slug'] = Str::slug($data['name']);
+    
+        $product->fill($data); 
+    
+        $product->save(); 
+    
+        return redirect()->route('products.index')->with('success', 'Il prodotto è stato aggiornato con successo.');
+    }
+    
+    
+
     /**
      * Display the specified resource.
      *
@@ -90,19 +108,6 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateProductRequest $request, Product $product)
-    {
-        if ($product->restaurant_id !== Auth::user()->restaurant->id) {
-            abort(403); // Unauthorized access
-        }
-
-        $data = $request->validated();
-        $product->update($data);
-        $data['slug'] = Str::slug($data['name']);
-
-        return redirect()->route('products.index')->with('success', 'Il prodotto è stato aggiornato con successo.');
-    }
-
     /**
      * Restore the specified resource.
      *

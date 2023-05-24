@@ -36,8 +36,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/products/{product:slug}/restore', [ProductController::class, 'restore'])->name('products.restore')->withTrashed();
     Route::post('/orders/{order}/restore', [OrderController::class, 'restore'])->name('orders.restore')->withTrashed();
     Route::resource('products', ProductController::class)->parameters([
-        'products' =>'product:slug'
-    ])->withTrashed(['show', 'edit', 'update', 'destroy']);
+        'products' =>'product'
+    ])->withTrashed(['show', 'edit', 'update', 'destroy']);    
 
     Route::resource('orders', OrderController::class)->parameters([
 

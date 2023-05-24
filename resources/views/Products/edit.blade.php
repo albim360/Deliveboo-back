@@ -41,8 +41,8 @@
             </div>
 
             <div class="mb-3">
-                <button type="submit" class="btn btn-primary"><a href="{{ route('products.index') }}" class="btn btn-primary">Salva</a></button>
-                
+                <button type="submit" class="btn btn-primary">Salva</button>
+                <a href="{{ route('products.index') }}" class="btn btn-secondary">Torna alla lista</a>
             </div>
 
         </form>
