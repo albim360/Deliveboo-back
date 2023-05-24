@@ -8,7 +8,10 @@ use App\Models\Product;
 use App\Models\Typology;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
-use Illuminate\Validation\Rule;
+
+
+// TODO: controllare le rule
+//use Illuminate\Validation\Rule;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 
@@ -107,6 +110,20 @@ class ProductController extends Controller
         $data['slug'] = Str::slug($data['name']);
 
         return redirect()->route('products.show', $product);
+    }
+
+    public function restore(Request $request, Product $product)
+    {
+
+        if ($product->trashed()) {
+            $product->restore();
+
+            $request->session()->flash('message', 'Il prodotto è stato ripristinato.');
+
+
+        }
+
+        return back();
     }
 
     /**

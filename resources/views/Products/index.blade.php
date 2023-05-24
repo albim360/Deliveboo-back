@@ -33,8 +33,6 @@
 
             </botton>
 
-
-
             <botton>
                 @if ($product->trashed())
                     <form action="{{ route('products.restore', $product) }}" method="POST">
@@ -43,6 +41,11 @@
                     </form>
                 @endif
             </botton>
+            @if (request()->session()->exists('message'))
+                <div class="alert alert-primary" role="alert">
+                    {{ request()->session()->pull('message') }}
+                </div>
+            @endif
 
         @empty
             <p>Vuoto</p>
