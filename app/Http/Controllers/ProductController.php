@@ -104,9 +104,10 @@ class ProductController extends Controller
         if ($product->restaurant_id !== Auth::user()->restaurant->address) {
             abort(403); // Unauthorized access
         }
-
         $data = $request->validated();
+        dd($data);
         $product->update($data);
+        dd($product);
         $data['slug'] = Str::slug($data['name']);
 
         return redirect()->route('products.show', $product);
