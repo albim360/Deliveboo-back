@@ -36,8 +36,8 @@ class RestaurantController extends Controller
     {
         $typologies = Typology::all();
 
-        //! vista rimanda in register cambiare
-        return view('restaurants.create', compact('typologies'));
+        //! vista rimanda in register
+        return view('auth.register', compact('typologies'));
     }
     /**
      * Store a newly created resource in storage.
