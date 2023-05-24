@@ -8,7 +8,10 @@ use App\Models\Product;
 use App\Models\Typology;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
-use Illuminate\Validation\Rule;
+
+
+// TODO: controllare le rule
+//use Illuminate\Validation\Rule;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 
@@ -22,8 +25,8 @@ class ProductController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $products = Product::where('restaurant_id', $user->restaurant_id)->withTrashed()->get();
-
+        $products = Product::where('restaurant_id', $user->restaurant->id)->withTrashed()->get();
+        //dd($products);
         return view('products.index', compact('products'));
     }
 
@@ -49,10 +52,10 @@ class ProductController extends Controller
     public function store(StoreProductRequest $request)
     {
         $data = $request->validated();
-        
+
         $data['slug'] = Str::slug($data['name']);
-        $data['restaurant_id'] = Auth::user()->restaurant_id;
-        dd(Auth::user()->restaurant->id);
+        $data['restaurant_id'] = Auth::user()->restaurant->id;
+        //dd(Auth::user()->restaurant->id);
         $product = Product::create($data);
 
         return redirect()->route('products.show', $product);
@@ -66,9 +69,10 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        if ($product->restaurant_id !== Auth::user()->restaurant_id) {
+        if ($product->restaurant_id !== Auth::user()->restaurant->id) {
             abort(403); // Unauthorized access
         }
+
 
         return view('products.show', compact('product'));
     }
@@ -81,7 +85,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        if ($product->restaurant_id !== Auth::user()->restaurant_id) {
+        if ($product->restaurant_id !== Auth::user()->restaurant->id) {
             abort(403); // Unauthorized access
         }
 
@@ -97,7 +101,7 @@ class ProductController extends Controller
      */
     public function update(UpdateProductRequest $request, Product $product)
     {
-        if ($product->restaurant_id !== Auth::user()->restaurant_id) {
+        if ($product->restaurant_id !== Auth::user()->restaurant->address) {
             abort(403); // Unauthorized access
         }
 
@@ -108,6 +112,18 @@ class ProductController extends Controller
         return redirect()->route('products.show', $product);
     }
 
+    public function restore(Request $request, Product $product)
+    {
+
+        if ($product->trashed()) {
+            $product->restore();
+
+            $request->session()->flash('message', 'Il prodotto è stato ripristinato.');
+        }
+
+        return back();
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -116,7 +132,7 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        if ($product->restaurant_id !== Auth::user()->restaurant_id) {
+        if ($product->restaurant_id !== Auth::user()->restaurant->id) {
             abort(403); // Unauthorized access
         }
 
