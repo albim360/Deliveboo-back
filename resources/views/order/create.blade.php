@@ -54,6 +54,7 @@
                 @endforeach
             </div>
         </div>
+        
 
         <div class="mb-3">
             <label for="total_payment" class="form-label">pagamento</label>

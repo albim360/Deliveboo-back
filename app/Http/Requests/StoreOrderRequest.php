@@ -29,7 +29,8 @@ class StoreOrderRequest extends FormRequest
             'telephone' => 'string|max:30',
             'address' => 'string|max:100',
             'email' => 'email',
-            'products' => 'exists:products,id'
+            'products' => 'exists:products,id',
+            'quantity' => 'string|max:100',
         ];
     }
     
