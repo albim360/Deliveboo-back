@@ -28,7 +28,9 @@ class StoreProductRequest extends FormRequest
             'name' => 'required|min:2',
             'description'=>'nullable|string',
             'price' => 'required|',
-            'img_product'=>'nullable|'
+
+            'img_product'=>'nullable',
+
         ];
     }
 }
