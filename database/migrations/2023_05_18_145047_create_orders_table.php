@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->dateTime('date')->required();
-            $table->decimal('total_payment', 10, 2)->required();
+            $table->decimal('total_payment', 10, 2)->nullable();
             $table->string('full_name', 50)->required();
             $table->string('telephone', 30)->required();
             $table->string('address', 100)->required();

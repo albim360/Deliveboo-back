@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Typology;
+use App\Models\User;
 use App\Models\Product;
 
 class Restaurant extends Model
@@ -38,5 +39,10 @@ class Restaurant extends Model
     public function getTypologyIds()
     {
         return $this->typologies->pluck('id')->all();
+    }
+
+    public function user()
+    {
+    return $this->hasOne(User::class);
     }
 }

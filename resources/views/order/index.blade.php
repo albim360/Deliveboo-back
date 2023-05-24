@@ -7,7 +7,7 @@
             ordini
         </h1>
         <div>
-            <a class="btn" href="{{route('orders.create')}}">Nuovo ordine</a>
+            <a class="btn" href="{{ route('orders.create') }}">Nuovo ordine</a>
         </div>
     </div>
     
@@ -21,11 +21,7 @@
                     <p>{{$order->total_payment}}</p>             
                     <p>{{$order->telephone}}</p> 
                     <p>{{$order->address}}</p> 
-                    <p>{{$order->email}}</p> 
-                    <p>
-                        {{ $order->trashed() ? $order->deleted_at : '' }} 
-                    </p>
-                
+                    <p>{{$order->email}}</p>               
                 
                 @empty 
                 

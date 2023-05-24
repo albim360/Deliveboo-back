@@ -25,11 +25,11 @@ class StoreOrderRequest extends FormRequest
     {
         return [
             'date' => 'date',
-            'total_payment' => 'numeric',
             'full_name' => 'string|max:50',
             'telephone' => 'string|max:30',
             'address' => 'string|max:100',
             'email' => 'email',
+            'products' => 'exists:products,id'
         ];
     }
     

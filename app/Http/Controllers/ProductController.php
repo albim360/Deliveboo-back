@@ -49,9 +49,10 @@ class ProductController extends Controller
     public function store(StoreProductRequest $request)
     {
         $data = $request->validated();
+        
         $data['slug'] = Str::slug($data['name']);
         $data['restaurant_id'] = Auth::user()->restaurant_id;
-
+        dd(Auth::user()->restaurant->id);
         $product = Product::create($data);
 
         return redirect()->route('products.show', $product);
