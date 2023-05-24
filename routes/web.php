@@ -21,6 +21,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/restaurant', [RestaurantController::class, 'index'])->name('restaurants.index');
+
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -29,7 +32,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::get('/restaurant', [RestaurantController::class, 'index'])->name('restaurants.index');
     Route::post('/restaurants/{restaurant:slug}/restore', [RestaurantController::class, 'restore'])->name('restaunts.restore')->withTrashed();
     Route::post('/products/{product:slug}/restore', [ProductController::class, 'restore'])->name('products.restore')->withTrashed();
     Route::post('/orders/{order}/restore', [OrderController::class, 'restore'])->name('orders.restore')->withTrashed();

@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 
+
 // ! add restaurant and typology
 use App\Models\Typology;
 use App\Models\Restaurant;
