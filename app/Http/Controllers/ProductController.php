@@ -119,8 +119,6 @@ class ProductController extends Controller
             $product->restore();
 
             $request->session()->flash('message', 'Il prodotto è stato ripristinato.');
-
-
         }
 
         return back();

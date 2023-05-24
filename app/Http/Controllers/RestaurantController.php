@@ -36,7 +36,7 @@ class RestaurantController extends Controller
     {
         $typologies = Typology::all();
 
-        //! vista rimanda in register
+        //! vista rimanda in register cambiare
         return view('restaurants.create', compact('typologies'));
     }
     /**

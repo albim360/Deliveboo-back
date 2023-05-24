@@ -13,6 +13,7 @@
         </div>
         <div>
             <a class="btn" href="{{route('products.edit',$product)}}">MODIFICA</a>
+            <a type="button" class="btn btn-success" href="{{route('products.index')}}">Prodotti</a>
             @if($product->trashed())
                     <form action="{{ route('products.restore',$product) }}" method="POST">
                         @csrf
