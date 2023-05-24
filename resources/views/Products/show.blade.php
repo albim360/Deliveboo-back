@@ -18,7 +18,7 @@
                         @csrf
                         <input class="btn btn-sm btn-success" type="submit" value="Ripristina">
                     </form>
-                @endif
+            @endif
         </div>
 
     </div>

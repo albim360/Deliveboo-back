@@ -22,8 +22,8 @@ class ProductController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $products = Product::where('restaurant_id', $user->restaurant_id)->withTrashed()->get();
-
+        $products = Product::where('restaurant_id', $user->restaurant->id)->withTrashed()->get();
+        //dd($products);
         return view('products.index', compact('products'));
     }
 
@@ -70,6 +70,7 @@ class ProductController extends Controller
             abort(403); // Unauthorized access
         }
 
+
         return view('products.show', compact('product'));
     }
 
@@ -85,7 +86,7 @@ class ProductController extends Controller
             abort(403); // Unauthorized access
         }
 
-        return view('products.show', compact('product'));
+        return view('products.edit', compact('product'));
     }
 
     /**
