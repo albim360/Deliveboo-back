@@ -2,14 +2,14 @@
 
 
 @section('content')
-    
+
 <div class="container">
     <div class="d-flex">
         <div >
             <h1 class="title">{{$product->name}}</h1>
             <p class="description">{{$product->description}}</p>
             <p class="price">{{$product->price}}</p>
-            
+
         </div>
         <div>
             <a class="btn" href="{{route('products.edit',$product)}}">MODIFICA</a>
@@ -22,7 +22,7 @@
         </div>
 
     </div>
-    
+
 
 </div>
 

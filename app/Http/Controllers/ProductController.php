@@ -49,10 +49,10 @@ class ProductController extends Controller
     public function store(StoreProductRequest $request)
     {
         $data = $request->validated();
-        
+
         $data['slug'] = Str::slug($data['name']);
-        $data['restaurant_id'] = Auth::user()->restaurant_id;
-        dd(Auth::user()->restaurant->id);
+        $data['restaurant_id'] = Auth::user()->restaurant->id;
+        //dd(Auth::user()->restaurant->id);
         $product = Product::create($data);
 
         return redirect()->route('products.show', $product);
@@ -66,7 +66,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        if ($product->restaurant_id !== Auth::user()->restaurant_id) {
+        if ($product->restaurant_id !== Auth::user()->restaurant->id) {
             abort(403); // Unauthorized access
         }
 
@@ -81,11 +81,11 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        if ($product->restaurant_id !== Auth::user()->restaurant_id) {
+        if ($product->restaurant_id !== Auth::user()->restaurant->id) {
             abort(403); // Unauthorized access
         }
 
-        return view('products.edit', compact('product'));
+        return view('products.show', compact('product'));
     }
 
     /**
@@ -97,7 +97,7 @@ class ProductController extends Controller
      */
     public function update(UpdateProductRequest $request, Product $product)
     {
-        if ($product->restaurant_id !== Auth::user()->restaurant_id) {
+        if ($product->restaurant_id !== Auth::user()->restaurant->address) {
             abort(403); // Unauthorized access
         }
 
@@ -116,7 +116,7 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        if ($product->restaurant_id !== Auth::user()->restaurant_id) {
+        if ($product->restaurant_id !== Auth::user()->restaurant->id) {
             abort(403); // Unauthorized access
         }
 
