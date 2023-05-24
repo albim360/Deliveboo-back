@@ -13,14 +13,20 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 
+// ! add restaurant and typology
+use App\Models\Typology;
+use App\Models\Restaurant;
+
 class RegisteredUserController extends Controller
 {
     /**
      * Display the registration view.
      */
+
     public function create(): View
     {
-        return view('auth.register');
+        $typologies = Typology::orderBy('category_kitchen')->get();
+        return view('auth.register', compact('typologies'));
     }
 
     /**
@@ -41,6 +47,21 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
+
+        //! add object restaurant::create
+        $restaurant = Restaurant::create([
+            'company_name' => $request['company_name'], // 'restaurant_name' is the name of the input in the form 'register.blade.php
+            'address' => $request['address'],
+            'vat_number' => $request['vat_number'],
+            'telephone' => $request['telephone'],
+            'description' => $request['description'],
+            'image' => $request['image'],
+
+            'user_id' => $user->id,
+        ]);
+        if (isset($request['typologies'])) {
+            $restaurant->typologies()->attach($request['typologies']);
+        }
 
         event(new Registered($user));
 
