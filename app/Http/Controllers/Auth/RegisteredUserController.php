@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use Illuminate\Support\Str;
 
 
 // ! add restaurant and typology
@@ -57,6 +58,7 @@ class RegisteredUserController extends Controller
             'telephone' => $request['telephone'],
             'description' => $request['description'],
             'image' => $request['image'],
+            'slug' => Str::slug($request['company_name']),
 
             'user_id' => $user->id,
         ]);
