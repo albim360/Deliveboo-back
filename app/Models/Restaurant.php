@@ -29,12 +29,11 @@ class Restaurant extends Model
         return $this->belongsToMany(Typology::class);
     }
 
-    public function product()
+    public function products()
     {
-        //return $this->belongsTo(Product::class);
-        
-        return $this->hasMany(Product::class); //questo ristorante ha molti prodotti
+    return $this->hasMany(Product::class);
     }
+
 
     public function getTypologyIds()
     {

@@ -43,7 +43,7 @@
           </div>
           <div class="mb-3">
             <label for="img_product" class="form-label">img_product</label>
-            <input type="url" class="form-control @error('img_product') is-invalid @enderror" id="img_product" name="img_product" value="{{ old('img_product') }}">
+            <input type="text" class="form-control @error('img_product') is-invalid @enderror" id="img_product" name="img_product" value="{{ old('img_product') }}">
             @error('img_product')
                 <div class="invalid-feedback">
                     {{ $message }}
