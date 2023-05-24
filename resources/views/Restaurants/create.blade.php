@@ -3,10 +3,7 @@
 
 
 @section('content')
-    
-<div>
-    modifica
-  </div>
+
   <div class="container">
       <form action="{{ route('restaurants.store') }}" method="POST">
   

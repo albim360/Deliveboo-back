@@ -4,8 +4,8 @@
 <div class="container">
     <div>
         <h1>
-            i ristoranti
-        </h1>
+        RISTORANTI        
+    </h1>
         <div>
             <a class="btn" href="{{route('restaurants.create')}}">Nuovo progetto</a>
         </div>

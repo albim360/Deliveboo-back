@@ -4,7 +4,7 @@
 <div class="container">
     <div>
         <h1>
-            ordini
+            ORDINI
         </h1>
         <div>
             <a class="btn" href="{{ route('orders.create') }}">Nuovo ordine</a>
