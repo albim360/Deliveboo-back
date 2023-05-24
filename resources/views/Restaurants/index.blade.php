@@ -6,9 +6,6 @@
         <h1>
         RISTORANTI        
     </h1>
-        <div>
-            <a class="btn" href="{{route('restaurants.create')}}">Nuovo progetto</a>
-        </div>
     </div>
     
                 {{-- @dd($restaurants); --}}
