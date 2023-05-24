@@ -22,10 +22,10 @@ class RestaurantController extends Controller
     {
         $user = Auth::user();
         $restaurants = Restaurant::where('user_id', $user->id)->with('typologies')->get();
-    
+
         return view('restaurants.index', compact('restaurants'));
     }
-    
+
 
     /**
      * Show the form for creating a new resource.
@@ -35,8 +35,9 @@ class RestaurantController extends Controller
     public function create()
     {
         $typologies = Typology::all();
-     
-        return view('restaurants.create', compact('typologies'));
+
+        //! vista rimanda in register
+        return view('auth.register', compact('typologies'));
     }
     /**
      * Store a newly created resource in storage.
@@ -52,7 +53,7 @@ class RestaurantController extends Controller
 
         $restaurant = Restaurant::create($data);
 
-       
+
         if (isset($data['typologies'])) {
 
             $restaurant->typologies()->attach($data['typologies']);
@@ -107,7 +108,7 @@ class RestaurantController extends Controller
 
         $restaurant->update($data);
 
-     
+
         if (isset($data['typologies'])) {
 
             $restaurant->typologies()->sync($data['typologies']);
@@ -139,7 +140,7 @@ class RestaurantController extends Controller
      * @param  \App\Models\Restaurant  $restaurant
      * @return \Illuminate\Http\Response
      */
-    
+
     public function destroy(Restaurant $restaurant)
     {
         if ($restaurant->trashed()) {
