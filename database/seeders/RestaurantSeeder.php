@@ -23,8 +23,8 @@ class RestaurantSeeder extends Seeder
         //$productIds = Product::pluck('id')->all();
         $typology_Ids = Typology::all()->pluck('id')->all();
 
-        $companyNames = ['Zia Restaurant ','daGorini',' Marotta Ristorante',' Dina','Condividere',' L’Argine a Vencò','Ristorante Villa Maiella','Antica Osteria Nonna Rosa','Gambero Rosso','Colline Ciociare','Abocar Due Cucine','Re Santi e Leoni','Oasis Sapori Antichi','Dalla Gioconda'];
 
+        $companyNames = ['Zia Restaurant ', 'daGorini', ' Marotta Ristorante', ' Dina', 'Condividere', ' L’Argine a Vencò', 'Ristorante Villa Maiella', 'Antica Osteria Nonna Rosa', 'Gambero Rosso', 'Colline Ciociare', 'Abocar Due Cucine', 'Re Santi e Leoni', 'Oasis Sapori Antichi', 'Dalla Gioconda'];
         foreach ($companyNames as $companyName) {
 
             $restaurant = new Restaurant();
