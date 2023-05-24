@@ -6,21 +6,11 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class StoreRestaurantRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
     public function authorize()
     {
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, mixed>
-     */
     public function rules()
     {
         return [
@@ -28,10 +18,11 @@ class StoreRestaurantRequest extends FormRequest
             'address' => 'required|min:2',
             'vat_number' => 'required|digits:11',
             'telephone' => 'required|min:10|max:15|unique:restaurants,telephone',
-            'description'=>'nullable|string',
-            'image'=>'nullable|url',
-            
-            
+            'description' => 'nullable|string',
+            'image' => 'nullable|url',
+            'typologies' => 'array', // Verifica che 'typologies' sia un array
+            'typologies.*' => 'integer', // Verifica che ogni elemento dell'array 'typologies' sia un intero (opzionale)
         ];
     }
 }
+
