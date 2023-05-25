@@ -4,13 +4,13 @@
 <div class="container">
     <div>
         <h1>
-        RISTORANTI        
+        RISTORANTI
     </h1>
         <div>
-            <a class="btn" href="{{route('restaurants.create')}}">Nuovo progetto</a>
+
         </div>
     </div>
-    
+
                 {{-- @dd($restaurants); --}}
                 @forelse ($restaurants as $restaurant)
 
@@ -21,11 +21,11 @@
                     <p>{{$restaurant->description}}</p>
                     <p>{{$restaurant->vat_number}}</p>
                     <p>{{$restaurant->telephone}}</p>
-                    
+
                     <p>
                         {{-- {{ $restaurant->trashed() ? $restaurant->deleted_at : '' }} --}}
                     </p>
-                    
+
                     <p>
                         @forelse ($restaurant->typologies as $typology)
                         <span>{{$typology->category_kitchen}}</span>
@@ -33,17 +33,17 @@
                         <span>-</span>
                         @endforelse
                     </p>
-                    
 
-                    
-                        
-                    
-                    
-                
-                @empty 
-                
+
+
+
+
+
+
+                @empty
+
                     <p>Vuoto</p>
-                
+
                 @endforelse
             </tbody>
 
