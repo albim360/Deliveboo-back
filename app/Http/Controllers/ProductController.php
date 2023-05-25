@@ -109,16 +109,15 @@ class ProductController extends Controller
     public function update(UpdateProductRequest $request, Product $product)
     {
 
-        $this->authorize('update', $product);
+        //$this->authorize('update', $product);
         $data = $request->validated();
 
         if ($request->hasFile('image')) {
-            $cover_path = Storage::put('uploads', $data['image']);
-            $data['cover_image'] = $cover_path;
+            $img_way = Storage::put('uploads', $data['image']);
+            $data['img_way'] = $img_way;
 
-            if ($product->cover_image && Storage::exists($product->cover_image)) {
-                // eliminare l'immagine $post->cover_image
-                Storage::delete($product->cover_image);
+            if ($product->img_way && Storage::exists($product->img_way)) {
+                Storage::delete($product->img_way);
             }
         }
 
