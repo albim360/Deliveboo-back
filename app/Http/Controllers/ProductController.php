@@ -11,7 +11,7 @@ use App\Http\Requests\UpdateProductRequest;
 
 
 // TODO: controllare le rule
-//use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 
@@ -88,7 +88,7 @@ class ProductController extends Controller
         if ($product->restaurant_id !== Auth::user()->restaurant->id) {
             abort(403); // Unauthorized access
         }
-
+        //dd($product);
         return view('products.edit', compact('product'));
     }
 
@@ -104,9 +104,9 @@ class ProductController extends Controller
         if ($product->restaurant_id !== Auth::user()->restaurant->address) {
             abort(403); // Unauthorized access
         }
-
         $data = $request->validated();
         $product->update($data);
+        dd($product);
         $data['slug'] = Str::slug($data['name']);
 
         return redirect()->route('products.show', $product);

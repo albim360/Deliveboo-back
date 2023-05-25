@@ -20,41 +20,25 @@
             <p>
                 {{ $product->trashed() ? $product->deleted_at : '' }}
             </p>
-            <botton>
-                <a class="btn " href="{{ route('products.edit', $product) }}">MODIFICA</a>
-
-            </botton>
-            <botton>
-                <form action="{{ route('products.destroy', $product) }}" method="POST">
+            <a class="btn btn-success" href="{{ route('products.edit', $product) }}">MODIFICA</a>
+            <form action="{{ route('products.destroy', $product) }}" method="POST">
+                @csrf
+                @method('DELETE')
+                <input class="btn btn-danger" type="submit" value="ELIMINA">
+            </form>
+            @if ($product->trashed())
+                <form action="{{ route('products.restore', $product) }}" method="POST">
                     @csrf
-                    @method('DELETE')
-                    <input class="btn" type="submit" value="ELIMINA">
+                    <input class="btn btn-sm btn-success" type="submit" value="Ripristina">
                 </form>
-
-            </botton>
-
-            <botton>
-                @if ($product->trashed())
-                    <form action="{{ route('products.restore', $product) }}" method="POST">
-                        @csrf
-                        <input class="btn btn-sm btn-success" type="submit" value="Ripristina">
-                    </form>
-                @endif
-            </botton>
+            @endif
             @if (request()->session()->exists('message'))
                 <div class="alert alert-primary" role="alert">
                     {{ request()->session()->pull('message') }}
                 </div>
             @endif
-
         @empty
             <p>Vuoto</p>
         @endforelse
-        </tbody>
-
-        </table>
-
-    </div>
-
     </div>
 @endsection
