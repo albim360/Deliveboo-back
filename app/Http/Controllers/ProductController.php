@@ -52,14 +52,14 @@ class ProductController extends Controller
         //dd($request->all());
         $data = $request->validated();
 
+        if ($request->hasFile('image')) {
+            $img_way = Storage::put('uploads', $data['image']);
+            $data['img_way'] = $img_way;
+        }
 
         $data['slug'] = Str::slug($data['name']);
         $data['restaurant_id'] = Auth::user()->restaurant->id;
 
-        if ($request->hasFile('image')) {
-            $cover_path = Storage::put('uploads', $data['image']);
-            $data['cover_image'] = $cover_path;
-        }
 
         $product = Product::create($data);
 
