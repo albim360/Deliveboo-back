@@ -17,7 +17,7 @@
                 <div class="card" style="width: 18rem;">
                     @if ($product->img_way)
                         <div class="container py-5">
-                            <img src="{{ asset('storage/upload'.$product->img_way) }}" alt="">
+                            <img src="{{ asset('storage/'.$product->img_way) }}" alt="">
                         </div>
                     @endif
                     <div class="card-body">
