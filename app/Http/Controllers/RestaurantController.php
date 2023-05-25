@@ -23,7 +23,7 @@ class RestaurantController extends Controller
         $restaurants = Restaurant::with('typologies')->get();
         return view('restaurants.index', compact('restaurants'));
     }
-    
+
 
 
     /**
@@ -70,6 +70,7 @@ class RestaurantController extends Controller
      */
     public function show(Restaurant $restaurant)
     {
+
         return view('restaurants.show', compact('restaurant'));
     }
 
@@ -158,6 +159,6 @@ class RestaurantController extends Controller
         })->get();
         return view('restaurants.index', compact('restaurants'));
     }
-    
-    
+
+
 }
