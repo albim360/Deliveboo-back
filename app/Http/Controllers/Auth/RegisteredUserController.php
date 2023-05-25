@@ -50,6 +50,7 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
+
         //! add object restaurant::create
         $restaurant = Restaurant::create([
             'company_name' => $request['company_name'], // 'restaurant_name' is the name of the input in the form 'register.blade.php
@@ -64,6 +65,7 @@ class RegisteredUserController extends Controller
 
             'user_id' => $user->id,
         ]);
+        dd($restaurant);
         if (isset($request['typologies'])) {
             $restaurant->typologies()->attach($request['typologies']);
         }
