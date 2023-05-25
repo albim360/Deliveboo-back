@@ -16,13 +16,11 @@ class TypologyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        // // $typologies = Typology::withTrashed()->get();
-
-        // // return view('typologies.index', compact('typologies'));
+    public function index() {
+        $typologies = Typology::all(); 
+        return view('typologies.index', ['typologies' => $typologies]);
     }
-
+    
     /**
      * Show the form for creating a new resource.
      *
