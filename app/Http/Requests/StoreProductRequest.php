@@ -29,7 +29,6 @@ class StoreProductRequest extends FormRequest
             'description'=>'nullable|string',
             'price' => 'required',
             'image' => 'nullable|image',
-            'img_product'=>'nullable'
         ];
     }
 }

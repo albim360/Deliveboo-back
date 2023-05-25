@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::table('products', function (Blueprint $table) {
             $table->string('img_way')->nullable()->after('slug');
             $table->string('img_name')->nullable()->after('slug');
-            $table->dropColumn('img_product');
+            //$table->dropColumn('img_product');
         });
     }
 

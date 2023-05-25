@@ -52,14 +52,14 @@ class ProductController extends Controller
         //dd($request->all());
         $data = $request->validated();
 
+
+        $data['slug'] = Str::slug($data['name']);
+        $data['restaurant_id'] = Auth::user()->restaurant->id;
+        //dd($data['restaurant_id']);
         if ($request->hasFile('image')) {
             $img_way = Storage::put('uploads', $data['image']);
             $data['img_way'] = $img_way;
         }
-
-        $data['slug'] = Str::slug($data['name']);
-        $data['restaurant_id'] = Auth::user()->restaurant->id;
-
 
         $product = Product::create($data);
 
@@ -75,7 +75,7 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         $user = Auth::user();
-        
+
         if ($product->restaurant_id !== $user->restaurant->id) {
             abort(403); // Unauthorized access
         }
