@@ -101,12 +101,15 @@ class ProductController extends Controller
      */
     public function update(UpdateProductRequest $request, Product $product)
     {
-        if ($product->restaurant_id !== Auth::user()->restaurant->address) {
-            abort(403); // Unauthorized access
-        }
+        // TODO : verificare a cosa serve la condizione
+        //if ($product->restaurant_id !== Auth::user()->restaurant->address) {
+        //    //abort(403); // Unauthorized access
+        //    $data = $request->validated();
+        //    dd($data);
+        //}
         $data = $request->validated();
         $product->update($data);
-        dd($product);
+        //dd($product);
         $data['slug'] = Str::slug($data['name']);
 
         return redirect()->route('products.show', $product);
