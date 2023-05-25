@@ -21,15 +21,15 @@
 
 
           <div class="mb-3">
-            <label for="description" class="form-label">description</label>
-            <input type="text" class="form-control @error('description') is-invalid @enderror" id="description" name="description" value="{{ old('description',$product->description) }}">
+            <label for="description" class="form-label">Description</label>
+            <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description">{{ old('description', $product->description) }}</textarea>
             @error('description')
-              <div class="invalid-feedback">
-                  {{ $message }}
+             <div class="invalid-feedback">
+              {{ $message }}
               </div>
-            @enderror
+             @enderror
 
-          </div>
+      </div>
 
 
 
