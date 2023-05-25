@@ -5,11 +5,11 @@
 @section('content')
 
   <div class="container">
-      <form action="{{ route('restaurants.store') }}" method="POST">
-  
+      <form action="{{ route('restaurants.store') }}" method="POST" enctype="multipart/form-data">
+
           @csrf
-          
-    
+
+
           <div class="mb-3">
             <label for="company_name" class="form-label">Titolo</label>
             <input type="text" class="form-control  @error('company_name') is-invalid @enderror" id="company_name" name="company_name"  value="{{ old('company_name') }}">
@@ -19,7 +19,7 @@
                 </div>
             @enderror
           </div>
-          
+
           <div class="mb-3">
             <label for="typologies" class="form-label">tipi</label>
             <div class="d-flex @error('typologies') is-invalid @enderror flex-wrap gap-3">
@@ -40,8 +40,8 @@
               </div>
             @enderror
           </div>
-  
-    
+
+
           <div class="mb-3">
             <label for="description" class="form-label">description</label>
             <input type="text" class="form-control @error('description') is-invalid @enderror" id="description" name="description" value="{{ old('description') }}">
@@ -51,9 +51,9 @@
                 </div>
             @enderror
           </div>
-    
-          
-    
+
+
+
           <div class="mb-3">
             <label for="vat_number" class="form-label">vat_number</label>
             <input type="text" class="form-control @error('vat_number') is-invalid @enderror" id="vat_number" name="vat_number" value="{{ old('vat_number') }}">
@@ -63,7 +63,7 @@
                 </div>
             @enderror
           </div>
-    
+
           <div class="mb-3">
             <label for="telephone" class="form-label">Telephone</label>
             <input type="number" class="form-control @error('telephone') is-invalid @enderror" id="telephone" name="telephone"  value="{{ old('telephone') }}">
@@ -82,16 +82,16 @@
                 </div>
             @enderror
           </div>
-            
-            
-    
+
+
+
         </div>
-    
+
           <button type="submit" class="btn btn-primary">Salva</button>
       </form>
-      
-    
-  
+
+
+
   </div>
 
 @endsection
