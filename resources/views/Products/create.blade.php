@@ -6,7 +6,7 @@
   modifica
 </div>
 <div class="container">
-  <form action="{{ route('products.store') }}" method="POST">
+  <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
 
     @csrf
 
@@ -40,13 +40,13 @@
       @enderror
     </div>
     <div class="mb-3">
-      <label for="img_product" class="form-label">img_product</label>
-      <input type="text" class="form-control @error('img_product') is-invalid @enderror" id="img_product" name="img_product" value="{{ old('img_product') }}">
-      @error('img_product')
-      <div class="invalid-feedback">
-        {{ $message }}
-      </div>
-      @enderror
+        <label for="image" class="form-label">Immagine di copertina</label>
+        <input type="file" name="image" class="form-control @error('image') is-invalid @enderror" value="{{ old('image') }}" id="image" aria-describedby="titleHelp">
+        @error('image')
+          <div class="invalid-feedback">
+              {{ $message }}
+          </div>
+        @enderror
     </div>
 
     <input type="hidden" name="restaurant_id" value="{{ Auth::user()->restaurant_id }}">

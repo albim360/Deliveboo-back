@@ -13,6 +13,7 @@ use App\Http\Requests\UpdateProductRequest;
 //use Illuminate\Validation\Rule;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -48,7 +49,14 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
+        dd($request->all());
         $data = $request->validated();
+
+        if ($request->hasFile('image')) {
+            $cover_path = Storage::put('uploads', $data['image']);
+            $data['cover_image'] = $cover_path;
+        }
+
         $data['slug'] = Str::slug($data['name']);
         $data['restaurant_id'] = Auth::user()->restaurant->id;
 
@@ -96,14 +104,20 @@ class ProductController extends Controller
      */
     public function update(UpdateProductRequest $request, Product $product)
     {
-        // TODO : verificare a cosa serve la condizione
-        //if ($product->restaurant_id !== Auth::user()->restaurant->address) {
-        //    //abort(403); // Unauthorized access
-        //    $data = $request->validated();
-        //    dd($data);
-        //}
 
+        $this->authorize('update', $product);
         $data = $request->validated();
+
+        if ($request->hasFile('image')) {
+            $cover_path = Storage::put('uploads', $data['image']);
+            $data['cover_image'] = $cover_path;
+
+            if ($product->cover_image && Storage::exists($product->cover_image)) {
+                // eliminare l'immagine $post->cover_image
+                Storage::delete($product->cover_image);
+            }
+        }
+
         $product->update($data);
         //dd($product);
         $data['slug'] = Str::slug($data['name']);
