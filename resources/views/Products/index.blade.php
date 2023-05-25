@@ -15,7 +15,11 @@
 
             @forelse ($products as $product)
                 <div class="card" style="width: 18rem;">
-                    <img src="..." class="card-img-top" alt="...">
+                    @if ($product->img_way)
+                        <div class="container py-5">
+                            <img src="{{ asset('storage/'.$product->img_way) }}" alt="">
+                        </div>
+                    @endif
                     <div class="card-body">
                         <h5 class="card-title">{{ $product->id }}. <a
                                 href="{{ route('products.show', $product) }}">{{ $product->name }}</a></h5>
@@ -23,7 +27,7 @@
                     </div>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">Prezzo: €{{ $product->price }}</li>
-    
+
                     </ul>
                     <div class="card-body d-flex gap-2">
                         <a class="btn btn-success" href="{{ route('products.edit', $product) }}">MODIFICA</a>
@@ -45,11 +49,11 @@
                         </div>
                     @endif
                 </div>
-    
-    
-    
-    
-    
+
+
+
+
+
                 {{-- @if (request()->session()->exists('message'))
                     <div class="alert alert-primary" role="alert">
                         {{ request()->session()->pull('message') }}
