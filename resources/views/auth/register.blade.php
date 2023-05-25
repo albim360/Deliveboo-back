@@ -98,19 +98,18 @@
                             </div>
 
                             <div class="mb-4 row">
-                                <label for="description" class="col-md-4 col-form-label text-md-right">Description</label>
+                            <label for="description" class="col-md-4 col-form-label text-md-right">Description</label>
 
-                                <div class="col-md-6">
-                                    <input id="description" type="text" class="form-control @error('description') is-invalid @enderror" name="description" value="{{ old('description') }}" required>
+                            <div class="col-md-6">
+                                <textarea id="description" class="form-control @error('description') is-invalid @enderror" name="description" required>{{ old('description') }}</textarea>
 
-                                    @error('description')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
+                                @error('description')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
-
+                        </div>
                             <div class="mb-4 row">
                                 <label for="vat_number" class="col-md-4 col-form-label text-md-right">VAT Number</label>
 
