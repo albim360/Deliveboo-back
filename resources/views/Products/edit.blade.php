@@ -1,14 +1,11 @@
 @extends('layouts.app')
 
-
 @section('content')
+    <div class="container">
+        <form action="{{ route('products.update', $product) }}" method="POST">
 
-
-  <div class="container">
-      <form action="{{ route('products.update',$product)}}" method="POST">
-
-          @csrf
-          @method('PUT')
+            @csrf
+            @method('PUT')
 
           <div class="mb-3">
             <label for="name" class="form-label">name</label>
@@ -24,15 +21,15 @@
 
 
           <div class="mb-3">
-            <label for="description" class="form-label">description</label>
-            <input type="text" class="form-control @error('description') is-invalid @enderror" id="description" name="description" value="{{ old('description',$product->description) }}">
+            <label for="description" class="form-label">Description</label>
+            <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description">{{ old('description', $product->description) }}</textarea>
             @error('description')
-              <div class="invalid-feedback">
-                  {{ $message }}
+             <div class="invalid-feedback">
+              {{ $message }}
               </div>
-            @enderror
+             @enderror
 
-          </div>
+      </div>
 
 
 
@@ -48,14 +45,10 @@
 
 
           <div class="mb-3">
-
-            <button type="submit" class="btn btn-primary" href="{{ route('products.show', $product) }}">Salva</button>
-          </div>
-
-
-      </form>
-
-
-  </div>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary">Salva</button>
+            </div>
+        </form>
+    </div>
 
 @endsection

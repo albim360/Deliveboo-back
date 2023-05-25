@@ -79,21 +79,26 @@
                                     </span>
                                 @enderror
                             </div>
+                            <div class="mb-4 row">
+                            <label for="description" class="col-md-4 col-form-label text-md-right">Description</label>
 
-                            <div class="mb-4">
-                                <label for="description" class="form-label">Description</label>
-                                <input id="description" type="text" class="form-control @error('description') is-invalid @enderror" name="description" value="{{ old('description') }}" required>
+                            <div class="col-md-6">
+                                <textarea id="description" class="form-control @error('description') is-invalid @enderror" name="description" required>{{ old('description') }}</textarea>
+
                                 @error('description')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
+                        </div>
+                            <div class="mb-4 row">
+                                <label for="vat_number" class="col-md-4 col-form-label text-md-right">VAT Number</label>
 
-                            <div class="mb-4">
-                                <label for="vat_number" class="form-label">VAT Number</label>
-                                <input id="vat_number" type="text" class="form-control @error('vat_number') is-invalid @enderror" name="vat_number" value="{{ old('vat_number') }}" required>
-                                @error('vat_number')
+                                <div class="col-md-6">
+                                    <input id="vat_number" type="text" class="form-control @error('vat_number') is-invalid @enderror" name="vat_number" value="{{ old('vat_number') }}" required>
+
+                                    @error('vat_number')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

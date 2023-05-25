@@ -4,5 +4,6 @@
 <a class="btn" href="{{route('products.store')}}">Prodotti ristoranti</a>
 <a class="btn" href="{{route('orders.index')}}">Ordini</a>
 <a class="btn" href="{{route('restaurants.store')}}">Ristoranti</a>
+<a class="btn" href="{{route('typologies.index')}}">Categorie</a>
 
 @endsection

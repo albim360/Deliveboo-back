@@ -20,11 +20,10 @@ class RestaurantController extends Controller
      */
     public function index(Request $request)
     {
-        $user = Auth::user();
-        $restaurants = Restaurant::where('user_id', $user->id)->with('typologies')->get();
-
+        $restaurants = Restaurant::with('typologies')->get();
         return view('restaurants.index', compact('restaurants'));
     }
+    
 
 
     /**
@@ -153,4 +152,12 @@ class RestaurantController extends Controller
 
         return redirect()->route('restaurants.index');
     }
+    public function filterByType($type_id) {
+        $restaurants = Restaurant::whereHas('typologies', function($query) use ($type_id) {
+            $query->where('typology_id', $type_id);
+        })->get();
+        return view('restaurants.index', compact('restaurants'));
+    }
+    
+    
 }

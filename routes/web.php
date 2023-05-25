@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\TypologyController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,6 +23,11 @@ Route::get('/', function () {
 });
 
 Route::get('/restaurant', [RestaurantController::class, 'index'])->name('restaurants.index');
+Route::get('/typologies/{type_id}', [RestaurantController::class, 'filterByType'])->name('restaurants.filterByType');
+Route::get('/typologies', [TypologyController::class, 'index'])->name('typologies.index');
+
+
+
 
 
 Route::get('/dashboard', function () {
@@ -32,7 +38,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::post('/restaurants/{restaurant:slug}/restore', [RestaurantController::class, 'restore'])->name('restaunts.restore')->withTrashed();
+    Route::post('/restaurants/{restaurant:slug}/restore', [RestaurantController::class, 'restore'])->name('restaurants.restore')->withTrashed();
     Route::post('/products/{product:slug}/restore', [ProductController::class, 'restore'])->name('products.restore')->withTrashed();
     Route::post('/orders/{order}/restore', [OrderController::class, 'restore'])->name('orders.restore')->withTrashed();
     Route::resource('products', ProductController::class)->parameters([
@@ -43,7 +49,7 @@ Route::middleware('auth')->group(function () {
 
         'orders' =>'order'
     ])->withTrashed(['show', 'edit', 'update', 'destroy']);
-   
+
     Route::resource('restaurants', RestaurantController::class)->parameters([
         'restaurants' =>'restaurant:slug'
     ])->withTrashed(['show', 'edit', 'update', 'destroy']);
@@ -51,14 +57,14 @@ Route::middleware('auth')->group(function () {
     Route::post('/password/check', function () {
         $password = request('password');
         $passwordConfirmation = request('password_confirmation');
-    
+
         if ($password !== $passwordConfirmation) {
             return response()->json(['message' => 'Le password non corrispondono.'], 422);
         }
-    
+
         return response()->json(['message' => 'Le password corrispondono.'], 200);
     })->name('password.check');
-    
+
 });
 
 require __DIR__.'/auth.php';
