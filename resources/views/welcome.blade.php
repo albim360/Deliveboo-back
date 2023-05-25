@@ -29,6 +29,7 @@
                     <img class="w-100 h-100 img" src="{{ url('img/restaurant.jpg') }}" alt="Ristoranti">
                     <h4 class="section-title">Ristoranti</h4>
                 </a>
+                <a class="btn" href="{{route('typologies.index')}}">Categorie</a>
             </div>
         </div>
     </div>
