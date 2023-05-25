@@ -21,7 +21,9 @@ class Restaurant extends Model
         'telephone',
         'description',
         'slug',
-        'user_id'
+        'user_id',
+        'img_way',
+        'img_name'
         //'product_id', eliminato
     ];
 
