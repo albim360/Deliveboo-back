@@ -49,16 +49,17 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-        dd($request->all());
+        //dd($request->all());
         $data = $request->validated();
+
+
+        $data['slug'] = Str::slug($data['name']);
+        $data['restaurant_id'] = Auth::user()->restaurant->id;
 
         if ($request->hasFile('image')) {
             $cover_path = Storage::put('uploads', $data['image']);
             $data['cover_image'] = $cover_path;
         }
-
-        $data['slug'] = Str::slug($data['name']);
-        $data['restaurant_id'] = Auth::user()->restaurant->id;
 
         $product = Product::create($data);
 
