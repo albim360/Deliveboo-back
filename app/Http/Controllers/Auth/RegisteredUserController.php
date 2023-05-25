@@ -59,6 +59,8 @@ class RegisteredUserController extends Controller
             'description' => $request['description'],
             'image' => $request['image'],
             'slug' => Str::slug($request['company_name']),
+            'img_way' => $request['img_way'],
+            'img_name' => $request['img_name'],
 
             'user_id' => $user->id,
         ]);
