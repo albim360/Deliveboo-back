@@ -20,7 +20,8 @@ class RestaurantController extends Controller
      */
     public function index(Request $request)
     {
-        $restaurants = Restaurant::with('typologies')->get();
+        $user = Auth::user();
+        $restaurants = Restaurant::where('user_id', $user->id)->with('typologies')->get();
         return view('restaurants.index', compact('restaurants'));
     }
 
