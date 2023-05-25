@@ -57,7 +57,7 @@ class ProductController extends Controller
         return redirect()->route('products.index')->with('success', 'Il prodotto è stato salvato con successo.');
     }
 
-    /**
+ /**
      * Display the specified resource.
      *
      * @param  \App\Models\Product  $product
@@ -65,12 +65,15 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        if ($product->restaurant_id !== Auth::user()->restaurant->id) {
+        $user = Auth::user();
+        
+        if ($product->restaurant_id !== $user->restaurant->id) {
             abort(403); // Unauthorized access
         }
 
         return view('products.show', compact('product'));
-    }
+}
+
 
     /**
      * Show the form for editing the specified resource.
