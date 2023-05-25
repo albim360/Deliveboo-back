@@ -45,14 +45,10 @@
 
 
           <div class="mb-3">
-
-            <button type="submit" class="btn btn-primary" href="{{ route('products.show', $product) }}">Salva</button>
-          </div>
-
-
-      </form>
-
-
-  </div>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary">Salva</button>
+            </div>
+        </form>
+    </div>
 
 @endsection
