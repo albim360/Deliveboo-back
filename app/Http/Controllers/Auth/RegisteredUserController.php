@@ -66,7 +66,7 @@ class RegisteredUserController extends Controller
 
             'user_id' => $user->id,
         ]);
-        dd($restaurant);
+        //dd($restaurant);
         if (isset($request['typologies'])) {
             $restaurant->typologies()->attach($request['typologies']);
         }
