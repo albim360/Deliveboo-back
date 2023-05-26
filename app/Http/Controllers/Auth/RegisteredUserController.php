@@ -48,7 +48,8 @@ class RegisteredUserController extends Controller
             'vat_number' => 'required|digits:11',
             'telephone' => 'required|min:10|max:15|unique:restaurants,telephone',
             'description' => 'required|string',
-            'typologies'=>'accepted', //non funziona
+            // 'typologies'=>'accepted', //non funziona
+            'typologies' =>'required',
             'image' => 'nullable|image'
         ]);
 

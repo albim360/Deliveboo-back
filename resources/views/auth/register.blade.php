@@ -72,16 +72,16 @@
                                     @foreach ($typologies->sortBy('category_kitchen') as $key => $typology)
                                         <div class="col-md-4">
                                             <div class="form-check">
-                                                <input name="typologies[]" class="form-check-input" type="checkbox"
-                                                    value="{{ $typology->id }}" id="typology{{ $key }}">
+                                                <input name="typologies" class="form-check-input @error('typologies') is-invalid @enderror" type="checkbox"
+                                                    value="{{ $typology->id }}" id="typology{{ $key }}" >
                                                 <label class="form-check-label" for="typology{{ $key }}">
                                                     {{ $typology->category_kitchen }}
                                                 </label>
                                             </div>
                                         </div>
                                     @endforeach
-
                                 </div>
+                                
                                 @error('typologies')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
