@@ -18,6 +18,7 @@ use Illuminate\Support\Str;
 // ! add restaurant and typology
 use App\Models\Typology;
 use App\Models\Restaurant;
+use Illuminate\Support\Facades\Storage;
 
 class RegisteredUserController extends Controller
 {
@@ -42,6 +43,8 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            //TODO: aggiungere validazione
+            //'image' => ['nullable', 'image'],
         ]);
 
         $user = User::create([
@@ -50,7 +53,13 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-
+        $data = $request;
+        //dd($data);
+        if ($request->hasFile('img_way')) {
+            $img_way = Storage::put('uploads', $data['img_way']);
+            //dd($img_way);
+            //$data['img_way'] = $img_way;
+        }
         //! add object restaurant::create
         $restaurant = Restaurant::create([
             'company_name' => $request['company_name'], // 'restaurant_name' is the name of the input in the form 'register.blade.php
@@ -58,11 +67,9 @@ class RegisteredUserController extends Controller
             'vat_number' => $request['vat_number'],
             'telephone' => $request['telephone'],
             'description' => $request['description'],
-            'image' => $request['image'],
             'slug' => Str::slug($request['company_name']),
-            'img_way' => $request['img_way'],
+            'img_way' => $img_way,
             'img_name' => $request['img_name'],
-//cose
 
             'user_id' => $user->id,
         ]);
