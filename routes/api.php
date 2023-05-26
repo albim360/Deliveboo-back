@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\RestaurantController;
+use App\Http\Controllers\Api\TypologyController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,3 +21,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/restaurants', [RestaurantController::class, 'index']);
+Route::get('/typologys', [TypologyController::class, 'index']);
