@@ -18,7 +18,7 @@ class StoreRestaurantRequest extends FormRequest
             'address' => 'required|min:2',
             'vat_number' => 'required|digits:11',
             'telephone' => 'required|min:10|max:15|unique:restaurants,telephone',
-            'description' => 'nullable|string',
+            'description' => 'required|string',
             'image' => 'nullable|url',
             'typologies' => 'array', // Verifica che 'typologies' sia un array
             'typologies.*' => 'integer', // Verifica che ogni elemento dell'array 'typologies' sia un intero (opzionale)
