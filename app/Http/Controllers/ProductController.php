@@ -95,7 +95,7 @@ class ProductController extends Controller
         if ($product->restaurant_id !== Auth::user()->restaurant->id) {
             abort(403); // Unauthorized access
         }
-        //dd($product);
+        
         return view('products.edit', compact('product'));
     }
 
@@ -121,10 +121,12 @@ class ProductController extends Controller
             }
         }
 
-        $product->update($data);
-        //dd($product);
-        $data['slug'] = Str::slug($data['name']);
+        if ($data['name'] !== $product->name) {
+            $data['slug'] = Str::slug($data['name']);
+        }
 
+        $product->update($data);
+     
         return redirect()->route('products.index')->with('success', 'Il prodotto è stato aggiornato con successo.');
     }
 
