@@ -14,7 +14,7 @@
         {{-- @dd($restaurants); --}}
         @forelse ($restaurants as $restaurant)
             {{-- @dd($restaurants); --}}
-            <img src="{{ asset('storage/' . $restaurant->img_way) }}" alt="">
+            <img src="{{ asset('storage/' .$restaurant->img_way) }}" alt="">
             <p>{{ $restaurant->id }}</p>
             <p><a href="{{ route('restaurants.show', $restaurant) }}">{{ $restaurant->company_name }}</a></p>
             <p>{{ $restaurant->address }}</p>
