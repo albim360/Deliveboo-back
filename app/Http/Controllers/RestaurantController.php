@@ -9,6 +9,7 @@ use App\Http\Requests\UpdateRestaurantRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 
 class RestaurantController extends Controller
@@ -50,6 +51,10 @@ class RestaurantController extends Controller
         $data = $request->validated();
         $data['slug'] = Str::slug($data['company_name']);
         $data ['user_id']= Auth::id();
+        if ($request->hasFile('image')) {
+            $img_way = Storage::put('uploads', $data['image']);
+            $data['img_way'] = $img_way;
+        }
 
         $restaurant = Restaurant::create($data);
 
@@ -106,6 +111,11 @@ class RestaurantController extends Controller
 
             $data['slug'] = Str::slug($data['company_name']);
         };
+
+        if ($request->hasFile('image')) {
+            $img_way = Storage::put('uploads', $data['image']);
+            $data['img_way'] = $img_way;
+        }
 
         $restaurant->update($data);
 

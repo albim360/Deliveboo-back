@@ -22,6 +22,7 @@ class StoreRestaurantRequest extends FormRequest
             'image' => 'nullable|url',
             'typologies' => 'array', // Verifica che 'typologies' sia un array
             'typologies.*' => 'integer', // Verifica che ogni elemento dell'array 'typologies' sia un intero (opzionale)
+            'image' => 'nullable|image'
         ];
     }
 }
