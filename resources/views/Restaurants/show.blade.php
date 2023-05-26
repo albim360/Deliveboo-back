@@ -10,7 +10,7 @@
                     <img src="{{ asset('storage/' . $restaurant->img_way) }}" class="card-img-top" alt="...">
                 @endif
                 <div class="card-body">
-                    <h1 class="title card-title">{{ $restaurant->company_name }}
+                    <h1 class="title card-title d-flex justify-content-center align-items-center gap-2">{{ $restaurant->company_name }}
                         @forelse ($restaurant->typologies as $typology)
                             <span class="badge rounded-pill bg-warning">{{ $typology->category_kitchen }}</span>
                         @empty
