@@ -141,14 +141,14 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="image" class="form-label">Immagine di copertina</label>
+                                    <label for="img_way" class="form-label">Immagine di copertina</label>
                                     <div class="input-group">
-                                        <input type="file" name="image"
-                                            class="form-control @error('image') is-invalid @enderror"
-                                            value="{{ old('image') }}" id="image" aria-describedby="titleHelp">
-                                        <label class="input-group-text" for="image">Carica</label>
+                                        <input type="file" name="img_way"
+                                            class="form-control @error('img_way') is-invalid @enderror"
+                                            value="{{ old('img_way') }}" id="img_way" aria-describedby="titleHelp">
+                                        <label class="input-group-text" for="img_way">Carica</label>
                                     </div>
-                                    @error('image')
+                                    @error('img_way')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
