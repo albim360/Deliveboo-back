@@ -43,8 +43,14 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            //TODO: aggiungere validazione
-            //'image' => ['nullable', 'image'],
+            'company_name' => 'required|string|min:2|unique:restaurants,company_name',
+            'address' => 'required|min:2',
+            'vat_number' => 'required|digits:11',
+            'telephone' => 'required|min:10|max:15|unique:restaurants,telephone',
+            'description' => 'required|string',
+            // 'typologies'=>'accepted', //non funziona
+            'typologies' =>'required',
+            'image' => 'nullable|image'
         ]);
 
         $user = User::create([
@@ -57,7 +63,6 @@ class RegisteredUserController extends Controller
         //dd($data);
         if ($request->hasFile('img_way')) {
             $img_way = Storage::put('uploads', $data['img_way']);
-            //dd($img_way);
             //$data['img_way'] = $img_way;
         }
         //! add object restaurant::create
@@ -72,7 +77,7 @@ class RegisteredUserController extends Controller
             'img_name' => $request['img_name'],
             'user_id' => $user->id,
         ]);
-        //dd($restaurant);
+        
         if (isset($request['typologies'])) {
             $restaurant->typologies()->attach($request['typologies']);
         }
