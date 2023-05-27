@@ -16,8 +16,8 @@
             @forelse ($products as $product)
                 <div class="card" style="width: 18rem;">
                     @if ($product->img_way)
-                        <div class="container py-5">
-                            <img src="{{ asset('storage/'.$product->img_way) }}" alt="">
+                        <div class="container px-0 w-100">
+                            <img class="card-img-top" src="{{ asset('storage/'.$product->img_way) }}" alt="">
                         </div>
                     @endif
                     <div class="card-body">
