@@ -12,7 +12,7 @@
         </div>
 
 
-        {{-- @dd($restaurants); --}
+        {{-- @dd($restaurants); --}}
         <div class="row">
             <div class="col-3">
                 @forelse ($restaurants as $restaurant)
