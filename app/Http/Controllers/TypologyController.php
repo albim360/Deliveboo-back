@@ -17,7 +17,7 @@ class TypologyController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $typologies = Typology::all(); 
+        $typologies = Typology::orderBy('category_kitchen', 'asc')->get(); 
         return view('typologies.index', ['typologies' => $typologies]);
     }
     
@@ -52,9 +52,9 @@ class TypologyController extends Controller
      * v@param  \App\Models\Typology
      * @return \Illuminate\Http\Response
      */
-    public function show(Typology $typology)
+    public function show($id)
     {
-        // return view('typologies.show',compact('typology'));
+        //return view('typologies.show');
     }
 
     /**
