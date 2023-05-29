@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\Models\Product;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
+use Illuminate\Support\Facades\DB;
 class OrderController extends Controller
 {
     /**
@@ -16,7 +17,14 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::get();
+        $user = Auth::user();
+        $orders = DB::table('users')
+        ->join('restaurants', 'users.id', '=', 'restaurants.user_id')
+        ->join('products', 'restaurants.id', '=', 'products.restaurant_id')
+        ->join('order_product', 'products.id', '=', 'order_product.product_id')
+        ->join('orders', 'order_product.order_id', '=', 'orders.id')
+        ->select('orders.*', 'products.id')
+        ->get();
 
         return view('order.index', compact('orders'));
     }
