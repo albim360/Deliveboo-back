@@ -81,7 +81,7 @@
                                         </div>
                                     @endforeach
                                 </div>
-                                
+
                                 @error('typologies')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

@@ -49,7 +49,7 @@ class RegisteredUserController extends Controller
             'telephone' => 'required|min:10|max:15|unique:restaurants,telephone',
             'description' => 'required|min:2|string',
             'typologies' =>'required',
-            'image' => 'nullable|image'
+            'img_way' => 'nullable|image'
         ]);
 
         $user = User::create([
@@ -72,11 +72,11 @@ class RegisteredUserController extends Controller
             'telephone' => $request['telephone'],
             'description' => $request['description'],
             'slug' => Str::slug($request['company_name']),
-            'img_way' => $img_way,
+            'img_way' => (!empty($img_way)) ? $img_way : "--",
             'img_name' => $request['img_name'],
             'user_id' => $user->id,
         ]);
-        
+
         if (isset($request['typologies'])) {
             $restaurant->typologies()->attach($request['typologies']);
         }
