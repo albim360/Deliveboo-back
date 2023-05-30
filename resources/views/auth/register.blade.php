@@ -69,16 +69,21 @@
                             <div class="mb-4">
                                 <label for="typologies" class="form-label">Typologies</label>
                                 <div class="row">
-                                    @foreach ($typologies->sortBy('category_kitchen') as $key => $typology)
-                                        <div class="col-md-4">
-                                            <div class="form-check">
-                                                <input name="typologies" class="form-check-input @error('typologies') is-invalid @enderror" type="checkbox"
-                                                    value="{{ $typology->id }}" id="typology{{ $key }}" >
-                                                <label class="form-check-label" for="typology{{ $key }}">
-                                                    {{ $typology->category_kitchen }}
-                                                </label>
-                                            </div>
+                                    @foreach($typologies as $key => $typology)
+                                    <div class="col-md-4">
+                                        <div class="form-check">
+                                            <input name="typologies[]" 
+                                            class="form-check-input @error('typologies') is-invalid @enderror"
+                                            type="checkbox"
+                                            value="{{ $typology->id }}"
+                                            id="flexCheckDefault"
+                                            @checked( in_array($typology->id, old('typologies',[]) ) )>
+
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                {{ $typology->category_kitchen }}
+                                            </label>
                                         </div>
+                                    </div>
                                     @endforeach
                                 </div>
 
