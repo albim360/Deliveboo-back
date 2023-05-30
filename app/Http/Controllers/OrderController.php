@@ -17,7 +17,6 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $user = Auth::user();
         $orders = DB::table('users')
         ->join('restaurants', 'users.id', '=', 'restaurants.user_id')
         ->join('products', 'restaurants.id', '=', 'products.restaurant_id')
