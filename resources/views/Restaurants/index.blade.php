@@ -18,7 +18,7 @@
                 @forelse ($restaurants as $restaurant)
                     <div class="card">
                         <img class="card-img-top" src="{{ asset('storage/' . $restaurant->img_way) }}" alt="">
-        
+
                         <div class="card-body">
                             <h5 class="card-title">{{ $restaurant->id }}: <a
                                     href="{{ route('restaurants.show', $restaurant) }}">{{ $restaurant->company_name }}</a></h5>
@@ -33,6 +33,7 @@
                                     <span>-</span>
                                 @endforelse
                             </p>
+                            <a href="{{ route('restaurants.edit', $restaurant) }}">modifica</a>
                         </div>
                     </div>
                     {{-- @dd($restaurants); --}}
@@ -43,11 +44,11 @@
                     {{-- <p>{{ $restaurant->description }}</p> --}}
                     {{-- <p>{{ $restaurant->vat_number }}</p> --}}
                     {{-- <p>{{ $restaurant->telephone }}</p> --}}
-        
+
                     {{-- <p>
                         {{ $restaurant->trashed() ? $restaurant->deleted_at : '' }}
                     </p> --}}
-        
+
                     {{-- <p>
                         @forelse ($restaurant->typologies as $typology)
                             <span>{{ $typology->category_kitchen }}</span>
@@ -55,10 +56,10 @@
                             <span>-</span>
                         @endforelse
                     </p> --}}
-        
+
 
                 @empty
-        
+
                     <p>Vuoto</p>
                 @endforelse
             </div>

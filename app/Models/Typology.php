@@ -19,10 +19,10 @@ class Typology extends Model
     {
         return $this->belongsToMany(Restaurant::class);
     }
-
+    //TODO : chiedere ad alberto
     public function index() {
         $typologies = Typology::all();
         return view('typologies.index', compact('typologies'));
     }
-    
+
 }
