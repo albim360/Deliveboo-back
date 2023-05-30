@@ -26,7 +26,7 @@
 
               @foreach($typologies as $key => $typology)
                 <div class="form-check">
-                  <input name="typologies[]" @checked( in_array($typology->id, old('typologies',[]) ) ) class="form-check-input" type="checkbox" value="{{ $typology->id }}" id="flexCheckDefault">
+                  <input name="typologies[]" class="form-check-input @error('typologies') is-invalid @enderror" type="checkbox" value="{{ $typology->id }}" id="flexCheckDefault" @checked( in_array($typology->id, old('typologies',[]) ) )>
                   <label class="form-check-label" for="flexCheckDefault">
                     {{ $typology->category_kitchen }}
                   </label>
