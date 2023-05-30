@@ -15,7 +15,7 @@
                                 <label for="name" class="form-label">{{ __('Name') }}</label>
                                 <input id="name" type="text"
                                     class="form-control @error('name') is-invalid @enderror" name="name"
-                                    value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                    value="{{ old('name') }}" required autocomplete="name" autofocus >
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
