@@ -5,7 +5,6 @@
         </h2>
 
         <p class="mt-1 text-muted">
-            {{ dd($restaurant) }}
         </p>
     </header>
 
