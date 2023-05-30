@@ -3,8 +3,8 @@
 @section('content')
     <div class="container">
         <div>
-            <h1>
-                RISTORANTI
+            <h1 class="text-uppercase">
+                ristoranti
             </h1>
             <div>
 
