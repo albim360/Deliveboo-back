@@ -2,14 +2,14 @@
 
 
 @section('content')
-    
+
 
   <div class="container">
-      <form action="{{ route('restaurants.update',$restaurant) }}" method="POST">
-  
+      <form action="{{ route('restaurants.update',$restaurant) }}" method="POST" enctype="multipart/form-data">
+
           @csrf
           @method('PUT')
-    
+
           <div class="mb-3">
             <label for="company_name" class="form-label">name company</label>
             <input type="text" class="form-control @error('company_name') is-invalid @enderror" id="company_name" name="company_name" value="{{ old('company_name',$restaurant->company_name) }}">
@@ -40,9 +40,9 @@
                 </div>
               @enderror
             </div>
-  
-          
-    
+
+
+
           <div class="mb-3">
             <label for="description" class="form-label">description</label>
             <input type="text" class="form-control @error('description') is-invalid @enderror" id="description" name="description" value="{{ old('description',$restaurant->description) }}">
@@ -51,11 +51,11 @@
                   {{ $message }}
               </div>
             @enderror
-            
+
           </div>
-    
-          
-    
+
+
+
           <div class="mb-3">
             <label for="vat_number" class="form-label">vat_number </label>
             <input type="text" class="form-control @error('vat_number') is-invalid @enderror" id="vat_number" name="vat_number" value="{{ old('vat_number',$restaurant->vat_number) }}">
@@ -74,7 +74,7 @@
                 </div>
             @enderror
           </div>
-    
+
           <div class="mb-3">
             <label for="telephone" class="form-label">telephone</label>
             <input type="number" class="form-control @error('telephone') is-invalid @enderror" id="telephone" name="telephone" value="{{ old('telephone',$restaurant->telephone) }}">
@@ -84,16 +84,31 @@
               </div>
             @enderror
           </div>
-         
+
           <div class="mb-3">
-            
+            <label for="img_way" class="form-label">Immagine di copertina</label>
+            <div class="input-group">
+                <input type="file" name="img_way"
+                    class="form-control @error('img_way') is-invalid @enderror"
+                    value="{{ old('img_way') }}" id="img_way" aria-describedby="titleHelp">
+                <label class="input-group-text" for="img_way">Carica</label>
+            </div>
+            @error('img_way')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
+        </div>
+
+          <div class="mb-3">
+
             <button type="submit" class="btn btn-primary">Salva</button>
           </div>
-    
-          
+
+
       </form>
-    
-  
+
+
   </div>
 
 @endsection

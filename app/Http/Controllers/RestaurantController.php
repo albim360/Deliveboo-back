@@ -91,7 +91,7 @@ class RestaurantController extends Controller
 
         $typologies = Typology::all(); //prendo typologies
 
-        return view('restaurants.edit', compact('restaurant,typologies'));
+        return view('restaurants.edit', compact('restaurant','typologies'));
 
     }
 
@@ -112,8 +112,8 @@ class RestaurantController extends Controller
             $data['slug'] = Str::slug($data['company_name']);
         };
 
-        if ($request->hasFile('image')) {
-            $img_way = Storage::put('uploads', $data['image']);
+        if ($request->hasFile('img_way')) {
+            $img_way = Storage::put('uploads', $data['img_way']);
             $data['img_way'] = $img_way;
         }
 

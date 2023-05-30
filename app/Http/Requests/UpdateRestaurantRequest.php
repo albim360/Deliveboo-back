@@ -35,8 +35,8 @@ class UpdateRestaurantRequest extends FormRequest
             'vat_number' => 'required|digits:11',
             'telephone' => 'required|min:10|max:15|unique:restaurants,telephone',
             'description'=>'nullable|string',
-            'image'=>'nullable|url',
-            
+            'img_way'=>'nullable|image',
+
         ];
     }
 }
