@@ -45,21 +45,45 @@
                 @enderror
             </div>
 
+
+
             <div class="mb-3">
-                <label for="image" class="form-label">Immagine di copertina</label>
-                <input type="file" name="image" class="form-control @error('image') is-invalid @enderror" value="{{ old('image') }}" id="image" aria-describedby="titleHelp">
-                @error('image')
-                  <div class="invalid-feedback">
-                      {{ $message }}
-                  </div>
-                @enderror
+                <div>
+                    <label for="image" class="form-label">Immagine di copertina</label>
+                    <input type="file" name="image" class="form-control @error('image') is-invalid @enderror"
+                        id="image" aria-describedby="titleHelp">
+                    @error('image')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+                {{-- <div>
+                    @if ($product->img_way)
+                    <p>{{ $product->img_name }}</p>
+                    <img class="w-25" src="{{ asset('storage/' . $product->img_way) }}" alt="">
+                    @endif
+                </div> --}}
             </div>
 
+            {{-- @if ($url_immagine_gia_caricata)
+                <img src="{{ asset('storage/' . $product->img_way) }}" alt="Immagine di copertina">
+                @endif --}}
 
-            <div class="mb-3">
+
                 <div class="mb-3">
-                    <button type="submit" class="btn btn-primary">Salva</button>
-                </div>
-        </form>
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-primary">Salva</button>
+                    </div>
+                </form>
+                @if ($product->img_way)
+                <p>{{ $product->img_name }}</p>
+                <img class="w-25" src="{{ asset('storage/' . $product->img_way) }}" alt="">
+                <form action="{{ route('products.img', $product) }}" method="POST">
+                    @csrf
+                    @method('PATCH')
+                    <button type="submit" class="btn btn-danger">elimina</button>
+                </form>
+                @endif
     </div>
 @endsection
