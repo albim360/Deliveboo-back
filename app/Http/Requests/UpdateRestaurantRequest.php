@@ -33,7 +33,12 @@ class UpdateRestaurantRequest extends FormRequest
             ],
             'address' => 'required|min:2',
             'vat_number' => 'required|digits:11',
-            'telephone' => 'required|min:10|max:15|unique:restaurants,telephone',
+            'telephone' => [
+                'required',
+                'min:10',
+                'max:15',
+                Rule::unique('restaurants', 'telephone')->ignore($this->restaurant)
+            ],
             'description'=>'nullable|string',
             'img_way'=>'nullable|image',
 
