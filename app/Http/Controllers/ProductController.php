@@ -144,7 +144,7 @@ class ProductController extends Controller
     {
         if ($product->trashed()) {
             $product->restore();
-            $request->session()->flash('message', 'Il prodotto è stato ripristinato.');
+            //$request->session()->flash('message', 'Il prodotto è stato ripristinato.');
         }
 
         return back();
