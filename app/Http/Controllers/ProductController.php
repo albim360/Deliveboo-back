@@ -57,6 +57,8 @@ class ProductController extends Controller
         $data['restaurant_id'] = Auth::user()->restaurant->id;
         //dd($data['restaurant_id']);
         if ($request->hasFile('image')) {
+            //dd($request->image->getClientOriginalName());
+            $data['img_name'] = $request->image->getClientOriginalName();
             $img_way = Storage::put('uploads', $data['image']);
             $data['img_way'] = $img_way;
         }
@@ -92,10 +94,10 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        if ($product->restaurant_id !== Auth::user()->restaurant->id) {
-            abort(403); // Unauthorized access
-        }
-        
+        // if ($product->restaurant_id !== Auth::user()->restaurant->id) {
+        //     abort(403); // Unauthorized access
+        // }
+
         return view('products.edit', compact('product'));
     }
 
@@ -113,6 +115,7 @@ class ProductController extends Controller
         $data = $request->validated();
 
         if ($request->hasFile('image')) {
+            $data['img_name'] = $request->image->getClientOriginalName();
             $img_way = Storage::put('uploads', $data['image']);
             $data['img_way'] = $img_way;
 
@@ -126,7 +129,7 @@ class ProductController extends Controller
         }
 
         $product->update($data);
-     
+
         return redirect()->route('products.index')->with('success', 'Il prodotto è stato aggiornato con successo.');
     }
 
@@ -165,6 +168,16 @@ class ProductController extends Controller
             $product->delete();
         }
 
+        return redirect()->route('products.index');
+    }
+
+    public function img(Product $product)
+    {
+        //dd('ciao');
+        Storage::delete($product->img_way);
+        $product->img_name = null;
+        $product->img_way = null;
+        $product->save();
         return redirect()->route('products.index');
     }
 }
