@@ -14,6 +14,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link href="../../scss/style/general.scss" rel="stylesheet">
 
     <script src="{{ asset('js/app.js') }}" defer></script>
     @yield('scripts')
@@ -46,7 +47,10 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{url('/') }}">{{ __('Home') }}</a>
+                        <a href="{{ url('/') }}">
+                         <img src="{{ asset('img/logoprova.png') }}" alt="logo" style="width: 100px">
+                        </a>
+
                         </li>
                     </ul>
 
@@ -93,5 +97,7 @@
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>
+
+
 
 </html>
