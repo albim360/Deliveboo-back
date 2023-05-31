@@ -12,7 +12,7 @@ class RestaurantController extends Controller
 {
     public function index(){
         // TODO: aggiungere paginazione nella query
-        $restaurants = Restaurant::all()->with('typologies')->get();
+        $restaurants = Restaurant::all();
 
         return response()->json([
             'success' => true,
