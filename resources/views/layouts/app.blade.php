@@ -26,7 +26,7 @@
     <div id="app">
 
 
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light  shadow-sm orange-site">
             <div class="container">
                 <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
                     <div class="logo_laravel">
@@ -101,3 +101,10 @@
 
 
 </html>
+<style>
+    .navbar{
+        background-color: #ff6600;
+    }
+
+
+</style>
