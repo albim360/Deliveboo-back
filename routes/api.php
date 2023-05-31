@@ -27,3 +27,4 @@ Route::get('/products/{slug}', [ProductController::class, 'show']);
 Route::get('/typologies', [TypologyController::class, 'index']);
 //rotta parametrica per tipologie
 Route::get('/typologies/{id}', [TypologyController::class, 'show']);
+Route::get('/restaurants/{slug}', [RestaurantController::class, 'show']);
