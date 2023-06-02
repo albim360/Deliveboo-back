@@ -26,8 +26,6 @@ class RestaurantController extends Controller
         return view('restaurants.index', compact('restaurants'));
     }
 
-
-
     /**
      * Show the form for creating a new resource.
      *
@@ -58,7 +56,6 @@ class RestaurantController extends Controller
 
         $restaurant = Restaurant::create($data);
 
-
         if (isset($data['typologies'])) {
 
             $restaurant->typologies()->attach($data['typologies']);
@@ -88,13 +85,10 @@ class RestaurantController extends Controller
      */
     public function edit(Restaurant $restaurant)
     {
-
         $typologies = Typology::all(); //prendo typologies
 
         return view('restaurants.edit', compact('restaurant','typologies'));
-
     }
-
 
     /**
      * Update the specified resource in storage.
@@ -136,13 +130,9 @@ class RestaurantController extends Controller
     //funzione per ripristinare
     public function restore(Request $request, Restaurant $restaurant)
     {
-
         if ($restaurant->trashed()) {
             $restaurant->restore();
-
-            $restaurant->session()->flash('message', 'Il ristorante è stato ripristinato.');
         }
-
         return back();
     }
     /**
@@ -164,12 +154,11 @@ class RestaurantController extends Controller
 
         return redirect()->route('restaurants.index');
     }
+
     public function filterByType($type_id) {
         $restaurants = Restaurant::whereHas('typologies', function($query) use ($type_id) {
             $query->where('typology_id', $type_id);
         })->get();
         return view('restaurants.index', compact('restaurants'));
     }
-
-
 }

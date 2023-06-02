@@ -36,28 +36,7 @@
                             <a href="{{ route('restaurants.edit', $restaurant) }}">modifica</a>
                         </div>
                     </div>
-                    {{-- @dd($restaurants); --}}
-                    {{-- <img class="card-img-top" src="{{ asset('storage/' . $restaurant->img_way) }}" alt=""> --}}
-                    {{-- <p>{{ $restaurant->id }}</p> --}}
-                    {{-- <p><a href="{{ route('restaurants.show', $restaurant) }}">{{ $restaurant->company_name }}</a></p> --}}
-                    {{-- <p>{{ $restaurant->address }}</p> --}}
-                    {{-- <p>{{ $restaurant->description }}</p> --}}
-                    {{-- <p>{{ $restaurant->vat_number }}</p> --}}
-                    {{-- <p>{{ $restaurant->telephone }}</p> --}}
-
-                    {{-- <p>
-                        {{ $restaurant->trashed() ? $restaurant->deleted_at : '' }}
-                    </p> --}}
-
-                    {{-- <p>
-                        @forelse ($restaurant->typologies as $typology)
-                            <span>{{ $typology->category_kitchen }}</span>
-                        @empty
-                            <span>-</span>
-                        @endforelse
-                    </p> --}}
-
-
+                   
                 @empty
 
                     <p>Vuoto</p>
