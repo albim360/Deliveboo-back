@@ -22,12 +22,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/restaurant', [RestaurantController::class, 'index'])->name('restaurants.index');
+// Route::get('/restaurant', [RestaurantController::class, 'index'])->name('restaurants.index');
 Route::get('/typologies/{type_id}', [RestaurantController::class, 'filterByType'])->name('restaurants.filterByType');
 Route::get('/typologies', [TypologyController::class, 'index'])->name('typologies.index');
-
-
-
 
 
 Route::get('/dashboard', function () {

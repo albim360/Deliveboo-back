@@ -9,7 +9,7 @@
     <div class="row py-4">
     <div class="col h-100">
             <div class="container d-flex align-items-center mt-3 ">
-                <a href="{{ route('restaurants.store') }}" class="product-link">
+                <a href="{{ route('restaurants.index') }}" class="product-link">
                     <img class="w-100 h-100 img" src="{{ url('img/restaurant.jpg') }}" alt="Ristoranti">
                     <h4 class="section-title">Il tuo ristorante</h4>
                 </a>
