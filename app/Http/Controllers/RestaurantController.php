@@ -110,32 +110,40 @@ class RestaurantController extends Controller
      */
     public function update(UpdateRestaurantRequest $request, Restaurant $restaurant)
     {
+        $user = Auth::user();
+    
+        // Verifica se l'utente è il proprietario del ristorante
+        if ($user->id !== $restaurant->user_id) {
+            abort(403); // Restituisci un errore di autorizzazione
+        }
+    
         $data = $request->validated();
-
+    
         if ($data['company_name'] !== $restaurant->company_name) {
             $data['slug'] = Str::slug($data['company_name']);
         }
-
+    
         if ($request->hasFile('img_way')) {
             $data['img_name'] = $request->img_way->getClientOriginalName();
             $img_way = Storage::put('uploads', $data['img_way']);
             $data['img_way'] = $img_way;
-
+    
             if ($restaurant->img_way && Storage::exists($restaurant->img_way)) {
                 Storage::delete($restaurant->img_way);
             }
         }
-
+    
         $restaurant->update($data);
-
+    
         if (isset($data['typologies'])) {
             $restaurant->typologies()->sync($data['typologies']);
         } else {
             $restaurant->typologies()->sync([]);
         }
-
+    
         return redirect()->route('restaurants.show', $restaurant);
     }
+    
 
     /**
      * Remove the specified resource from storage.
@@ -145,15 +153,22 @@ class RestaurantController extends Controller
      */
     public function destroy(Restaurant $restaurant)
     {
+        $user = Auth::user();
+    
+        if ($user->id !== $restaurant->user_id) {
+            abort(403); 
+        }
+    
         if ($restaurant->trashed()) {
-            $restaurant->typologies()->detach();
+            $restaurant->typologies()->detach(); 
             $restaurant->forceDelete();
         } else {
             $restaurant->delete();
         }
-
+    
         return redirect()->route('restaurants.index');
     }
+    
 
     /**
      * Filter restaurants by typology.
