@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <form action="{{ route('products.update', $product) }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('products.update', $product) }}" method="POST" enctype="multipart/form-data" class="py-4">
             @csrf
             @method('PUT')
 
@@ -50,32 +50,29 @@
                         </div>
                     @enderror
                 </div>
-                {{-- <div>
-                    @if ($product->img_way)
-                    <p>{{ $product->img_name }}</p>
-                    <img class="w-25" src="{{ asset('storage/' . $product->img_way) }}" alt="">
-                    @endif
-                </div> --}}
             </div>
 
-            {{-- @if ($url_immagine_gia_caricata)
-                <img src="{{ asset('storage/' . $product->img_way) }}" alt="Immagine di copertina">
-                @endif --}}
-
-
+            <div class="mb-3">
                 <div class="mb-3">
-                    <div class="mb-3">
-                        <button type="submit" class="btn btn-primary">Salva</button>
-                    </div>
-                </form>
-                @if ($product->img_way)
-                <p>{{ $product->img_name }}</p>
-                <img class="w-25" src="{{ asset('storage/' . $product->img_way) }}" alt="">
-                <form action="{{ route('products.img', $product) }}" method="POST">
-                    @csrf
-                    @method('PATCH')
-                    <button type="submit" class="btn btn-danger">elimina</button>
-                </form>
-                @endif
+                    <button type="submit" class="btn btn-primary">Salva</button>
+                </div>
+        </form>
+
+        @if ($product->img_way)
+        <div class="d-flex">
+            <div class="upload-img">
+                <p>
+                    <strong>Immagine Caricata:</strong>
+                    {{ $product->img_name }}
+                </p>
+                <img style="width: 15%" src="{{ asset('storage/' . $product->img_way) }}" alt="">
+            </div>
+            <form action="{{ route('products.img', $product) }}" method="POST">
+            @csrf
+            @method('PATCH')
+                <button type="submit" class="btn btn-danger">Elimina</button>
+            </form>
+        </div>
+        @endif
     </div>
 @endsection

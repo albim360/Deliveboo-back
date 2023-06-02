@@ -1,9 +1,7 @@
 @extends('layouts.app')
-
-
 @section('content')
     <div class="container mt-3">
-        <div class="d-flex justify-content-center ">
+        <div class="d-flex justify-content-center">
 
             <div class="card mb-3 col-3">
                 @if ($restaurant->img_way)
