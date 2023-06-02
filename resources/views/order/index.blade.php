@@ -2,9 +2,9 @@
 
 @section('content')
 <div class="container">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1>ORDINI</h1>
-        <a class="btn btn-primary" href="{{ route('orders.create') }}">Nuovo ordine</a>
+    <div class="text-uppercase">
+        <h1>ordini</h1>
+        <!-- <a class="btn btn-primary" href="{{ route('orders.create') }}">Nuovo ordine</a> -->
     </div>
     
     @forelse ($orders as $order)
