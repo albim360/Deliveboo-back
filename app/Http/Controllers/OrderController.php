@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
 use Illuminate\Support\Facades\DB;
+
 class OrderController extends Controller
 {
     /**
@@ -18,12 +19,12 @@ class OrderController extends Controller
     public function index()
     {
         $orders = DB::table('users')
-        ->join('restaurants', 'users.id', '=', 'restaurants.user_id')
-        ->join('products', 'restaurants.id', '=', 'products.restaurant_id')
-        ->join('order_product', 'products.id', '=', 'order_product.product_id')
-        ->join('orders', 'order_product.order_id', '=', 'orders.id')
-        ->select('orders.*', 'products.id')
-        ->get();
+            ->join('restaurants', 'users.id', '=', 'restaurants.user_id')
+            ->join('products', 'restaurants.id', '=', 'products.restaurant_id')
+            ->join('order_product', 'products.id', '=', 'order_product.product_id')
+            ->join('orders', 'order_product.order_id', '=', 'orders.id')
+            ->select('orders.*', 'products.id')
+            ->get();
 
         return view('order.index', compact('orders'));
     }
@@ -39,7 +40,7 @@ class OrderController extends Controller
 
         return view('order.create', compact('products'));
     }
-    
+
 
     /**
      * Store a newly created resource in storage.
@@ -47,23 +48,50 @@ class OrderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreOrderRequest $request)
-{
-    $data = $request->validated();
-    $data['quantity'] = 1; // Imposta il valore predefinito di 'quantity' a 1
-    
-    $order = Order::create($data);
-    
-    if (isset($data['products'])) {
-        $products = [];
-        foreach ($data['products'] as $product) {
-            $products[$product] = ['quantity' => $data['quantity']];
+    public function store(Request $request)
+    {
+        // $data = $request->validated();
+        // $data['quantity'] = 1; // Imposta il valore predefinito di 'quantity' a 1
+        $data = [
+            'name' => $request->input('name'),
+            'telephone' => $request->input('telephone'),
+            'date' => $request->input('date'),
+            'address' => $request->input('address'),
+            'email' => $request->input('email'),
+            //'prod' => $request->input('prod')
+        ];
+        $order = new Order();
+        $order->full_name = $data['name'];
+        $order->telephone = $data['telephone'];
+        $order->address = $data['address'];
+        $order->email = $data['email'];
+        $order->date = $data['date'];
+        $order->save();
+        //if (isset($data['prod'])) {
+        //    $order->products()->attach($data['prod']);
+        //}
+        $prods = $request->input('prod');
+        foreach ($prods as $prod) {
+            $prod_id = $prod['id'];
+            //TODO: quantita provvisoria
+            $quantity = 1;
+            if (isset($data['prod'])) {
+                $order->products()->attach($prod_id,['quantity' => $quantity]);
+            }
         }
-        $order->products()->attach($products);
+
+        // if (isset($data['products'])) {
+        //     $products = [];
+        //     foreach ($data['products'] as $product) {
+        //         $products[$product] = ['quantity' => $data['quantity']];
+        //     }
+        //     $order->products()->attach($products);
+        // }
+        //var_dump($data);
+
+        //return redirect()->route('orders.show', $order);
+        return response()->json(['success' => $data]);
     }
-    
-    return redirect()->route('orders.show', $order);
-}
 
 
 
@@ -103,14 +131,14 @@ class OrderController extends Controller
 
         if (isset($data['products'])) {
             $order->products()->sync($data['products']);
-        }else{
+        } else {
             $order->products()->sync([]);
             //alternativa usare detach()
         }
-        
+
         return to_route('order.show', $order);
     }
-    
+
 
     /**
      * Remove the specified resource from storage.
@@ -121,9 +149,9 @@ class OrderController extends Controller
     public function destroy($id)
     {
         if ($product->trashed()) {
-            $product->forceDelete(); 
+            $product->forceDelete();
         } else {
-            $product->delete(); 
+            $product->delete();
         }
 
         return to_route('order.index');
