@@ -11,7 +11,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 
-
 class RestaurantController extends Controller
 {
     /**
@@ -34,10 +33,9 @@ class RestaurantController extends Controller
     public function create()
     {
         $typologies = Typology::all();
-
-        //! vista rimanda in register
-        return view('auth.register', compact('typologies'));
+        return view('restaurants.create', compact('typologies'));
     }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -48,7 +46,8 @@ class RestaurantController extends Controller
     {
         $data = $request->validated();
         $data['slug'] = Str::slug($data['company_name']);
-        $data ['user_id']= Auth::id();
+        $data['user_id'] = Auth::id();
+        
         if ($request->hasFile('img_way')) {
             $data['img_name'] = $request->img_way->getClientOriginalName();
             $img_way = Storage::put('uploads', $data['img_way']);
@@ -58,9 +57,7 @@ class RestaurantController extends Controller
         $restaurant = Restaurant::create($data);
 
         if (isset($data['typologies'])) {
-
             $restaurant->typologies()->attach($data['typologies']);
-
         }
 
         return redirect()->route('restaurants.show', $restaurant);
@@ -74,6 +71,12 @@ class RestaurantController extends Controller
      */
     public function show(Restaurant $restaurant)
     {
+        $user = Auth::user();
+
+        // Verifica se l'utente è il proprietario del ristorante
+        if ($user->id !== $restaurant->user_id) {
+            abort(403); // Restituisci un errore di autorizzazione
+        }
 
         return view('restaurants.show', compact('restaurant'));
     }
@@ -86,10 +89,17 @@ class RestaurantController extends Controller
      */
     public function edit(Restaurant $restaurant)
     {
+        $user = Auth::user();
+    
+        if ($user->id !== $restaurant->user_id) {
+            abort(403); 
+        }
+    
         $typologies = Typology::all(); //prendo typologies
-
-        return view('restaurants.edit', compact('restaurant','typologies'));
+    
+        return view('restaurants.edit', compact('restaurant', 'typologies'));
     }
+    
 
     /**
      * Update the specified resource in storage.
@@ -103,9 +113,8 @@ class RestaurantController extends Controller
         $data = $request->validated();
 
         if ($data['company_name'] !== $restaurant->company_name) {
-
             $data['slug'] = Str::slug($data['company_name']);
-        };
+        }
 
         if ($request->hasFile('img_way')) {
             $data['img_name'] = $request->img_way->getClientOriginalName();
@@ -119,40 +128,25 @@ class RestaurantController extends Controller
 
         $restaurant->update($data);
 
-
         if (isset($data['typologies'])) {
-
             $restaurant->typologies()->sync($data['typologies']);
-
         } else {
-
             $restaurant->typologies()->sync([]);
-
         }
 
         return redirect()->route('restaurants.show', $restaurant);
     }
 
-    //funzione per ripristinare
-    public function restore(Request $request, Restaurant $restaurant)
-    {
-        if ($restaurant->trashed()) {
-            $restaurant->restore();
-        }
-        return back();
-    }
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Restaurant  $restaurant
      * @return \Illuminate\Http\Response
      */
-
     public function destroy(Restaurant $restaurant)
     {
         if ($restaurant->trashed()) {
-            $restaurant->typologies()->detach(); //elimino i collegamenti con la tabella ponte. Alternativa sulla migration modificare restric
-            //forse va eliminato anche il collegamento con products
+            $restaurant->typologies()->detach();
             $restaurant->forceDelete();
         } else {
             $restaurant->delete();
@@ -161,13 +155,27 @@ class RestaurantController extends Controller
         return redirect()->route('restaurants.index');
     }
 
-    public function filterByType($type_id) {
-        $restaurants = Restaurant::whereHas('typologies', function($query) use ($type_id) {
+    /**
+     * Filter restaurants by typology.
+     *
+     * @param  int  $type_id
+     * @return \Illuminate\Http\Response
+     */
+    public function filterByType($type_id)
+    {
+        $restaurants = Restaurant::whereHas('typologies', function ($query) use ($type_id) {
             $query->where('typology_id', $type_id);
         })->get();
+
         return view('restaurants.index', compact('restaurants'));
     }
 
+    /**
+     * Remove the restaurant image.
+     *
+     * @param  \App\Models\Restaurant  $restaurant
+     * @return \Illuminate\Http\Response
+     */
     public function img(Restaurant $restaurant)
     {
         Storage::delete($restaurant->img_way);

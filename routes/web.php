@@ -27,10 +27,6 @@ Route::get('/typologies/{type_id}', [RestaurantController::class, 'filterByType'
 Route::get('/typologies', [TypologyController::class, 'index'])->name('typologies.index');
 
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -41,16 +37,15 @@ Route::middleware('auth')->group(function () {
     Route::post('/products/{product:slug}/restore', [ProductController::class, 'restore'])->name('products.restore')->withTrashed();
     Route::post('/orders/{order}/restore', [OrderController::class, 'restore'])->name('orders.restore')->withTrashed();
     Route::resource('products', ProductController::class)->parameters([
-        'products' =>'product:slug'
+        'products' => 'product:slug'
     ])->withTrashed(['show', 'edit', 'update', 'destroy']);
 
     Route::resource('orders', OrderController::class)->parameters([
-
-        'orders' =>'order'
+        'orders' => 'order'
     ])->withTrashed(['show', 'edit', 'update', 'destroy']);
 
     Route::resource('restaurants', RestaurantController::class)->parameters([
-        'restaurants' =>'restaurant:slug'
+        'restaurants' => 'restaurant:slug'
     ])->withTrashed(['show', 'edit', 'update', 'destroy']);
 
     Route::post('/password/check', function () {
