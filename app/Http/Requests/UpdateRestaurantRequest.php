@@ -40,6 +40,8 @@ class UpdateRestaurantRequest extends FormRequest
                 Rule::unique('restaurants', 'telephone')->ignore($this->restaurant)
             ],
             'description'=>'nullable|string',
+            'typologies' => 'array',
+            'typologies.*' => 'integer',
             'img_way'=>'nullable|image',
 
         ];
