@@ -36,6 +36,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::patch('/products/{product:slug}/img', [ProductController::class, 'img'])->name('products.img');
+    Route::patch('/restaurants/{restaurant:slug}/img', [RestaurantController::class, 'img'])->name('restaurants.img');
     Route::post('/restaurants/{restaurant:slug}/restore', [RestaurantController::class, 'restore'])->name('restaurants.restore')->withTrashed();
     Route::post('/products/{product:slug}/restore', [ProductController::class, 'restore'])->name('products.restore')->withTrashed();
     Route::post('/orders/{order}/restore', [OrderController::class, 'restore'])->name('orders.restore')->withTrashed();

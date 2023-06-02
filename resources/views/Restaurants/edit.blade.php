@@ -2,7 +2,7 @@
 @section('content')
 
   <div class="container">
-    <form action="{{ route('restaurants.update',$restaurant) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('restaurants.update',$restaurant) }}" method="POST" enctype="multipart/form-data" class="py-4">
       @csrf
       @method('PUT')
 
@@ -100,5 +100,22 @@
       </div>
 
     </form>
+
+     @if ($restaurant->img_way)
+      <div class="d-flex">
+        <div class="upload-img">
+          <p>
+            <strong>Immagine Caricata:</strong>
+            {{ $restaurant->img_name }}
+          </p>
+          <img style="width: 15%" src="{{ asset('storage/' . $restaurant->img_way) }}" alt="">
+        </div>
+        <form action="{{ route('restaurants.img', $restaurant) }}" method="POST">
+          @csrf
+          @method('PATCH')
+            <button type="submit" class="btn btn-danger">Elimina</button>
+          </form>
+      </div>
+      @endif
   </div>
 @endsection

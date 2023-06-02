@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container d-flex flex-column gap-2">
-        <div class="gap-1">
+        <div class="d-flex align-items-center justify-content-between py-4">
             <h1>
                 Prodotti
             </h1>
@@ -11,12 +11,12 @@
             </div>
         </div>
 
-        <div class="container d-flex gap-2 ps-0 flex-wrap">
+        <div class="container d-flex gap-3 ps-0 flex-wrap align-items-start">
 
             @forelse ($products as $product)
             
                 @if (!$product->trashed()) <!--se il prodotto non è eliminato crea la card-->
-                    <div class="card" style="width: 18rem;">
+                    <div class="card " style="width: 18rem;">
                         @if ($product->img_way)
                             <div class="container px-0 w-100">
                                 <img class="card-img-top" src="{{ asset('storage/'.$product->img_way) }}" alt="">

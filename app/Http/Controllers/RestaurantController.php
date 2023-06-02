@@ -49,8 +49,9 @@ class RestaurantController extends Controller
         $data = $request->validated();
         $data['slug'] = Str::slug($data['company_name']);
         $data ['user_id']= Auth::id();
-        if ($request->hasFile('image')) {
-            $img_way = Storage::put('uploads', $data['image']);
+        if ($request->hasFile('img_way')) {
+            $data['img_name'] = $request->img_way->getClientOriginalName();
+            $img_way = Storage::put('uploads', $data['img_way']);
             $data['img_way'] = $img_way;
         }
 
@@ -107,8 +108,13 @@ class RestaurantController extends Controller
         };
 
         if ($request->hasFile('img_way')) {
+            $data['img_name'] = $request->img_way->getClientOriginalName();
             $img_way = Storage::put('uploads', $data['img_way']);
             $data['img_way'] = $img_way;
+
+            if ($restaurant->img_way && Storage::exists($restaurant->img_way)) {
+                Storage::delete($restaurant->img_way);
+            }
         }
 
         $restaurant->update($data);
@@ -160,5 +166,14 @@ class RestaurantController extends Controller
             $query->where('typology_id', $type_id);
         })->get();
         return view('restaurants.index', compact('restaurants'));
+    }
+
+    public function img(Restaurant $restaurant)
+    {
+        Storage::delete($restaurant->img_way);
+        $restaurant->img_name = null;
+        $restaurant->img_way = null;
+        $restaurant->save();
+        return redirect()->route('restaurants.index');
     }
 }
