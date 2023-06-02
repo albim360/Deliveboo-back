@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\RestaurantController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\TypologyController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -28,3 +29,4 @@ Route::get('/typologies', [TypologyController::class, 'index']);
 //rotta parametrica per tipologie
 Route::get('/typologies/{id}', [TypologyController::class, 'show']);
 Route::get('/restaurants/{slug}', [RestaurantController::class, 'show']);
+Route::post('/orders', [OrderController::class, 'store']);

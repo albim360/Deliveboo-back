@@ -33,5 +33,5 @@ class StoreOrderRequest extends FormRequest
             'quantity' => 'string|max:100',
         ];
     }
-    
+
 }
