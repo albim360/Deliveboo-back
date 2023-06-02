@@ -2,9 +2,6 @@
 
 @section('content')
 
-<div>
-  modifica
-</div>
 <div class="container">
   <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
 
