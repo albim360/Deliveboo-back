@@ -94,12 +94,13 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        // if ($product->restaurant_id !== Auth::user()->restaurant->id) {
-        //     abort(403); // Unauthorized access
-        // }
-
+        if ($product->restaurant_id !== Auth::user()->restaurant->id) {
+            abort(403); // Unauthorized access
+        }
+    
         return view('products.edit', compact('product'));
     }
+    
 
     /**
      * Update the specified resource in storage.
@@ -161,15 +162,16 @@ class ProductController extends Controller
         if ($product->restaurant_id !== Auth::user()->restaurant->id) {
             abort(403); // Unauthorized access
         }
-
+    
         if ($product->trashed()) {
             $product->forceDelete();
         } else {
             $product->delete();
         }
-
+    
         return redirect()->route('products.index');
     }
+    
 
     public function img(Product $product)
     {
