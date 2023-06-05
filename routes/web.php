@@ -5,6 +5,7 @@ use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\TypologyController;
+use App\Http\Controllers\StatisticController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -63,6 +64,7 @@ Route::middleware('auth')->group(function () {
         return response()->json(['message' => 'Le password corrispondono.'], 200);
     })->name('password.check');
 
+    Route::get('/statistics', [StatisticController::class, 'index'])->name('statistics');
 });
 
 require __DIR__.'/auth.php';
