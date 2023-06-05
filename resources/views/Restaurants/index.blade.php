@@ -8,7 +8,7 @@
         <div class="row">
             <div class="d-flex justify-content-center">
                 @forelse ($restaurants as $restaurant)
-                    <div class="card mb-3 col-4">
+                    <div class="card mb-3 col-md-5">
                         @if ($restaurant->img_way)
                             <img src="{{ asset('storage/' . $restaurant->img_way) }}" class="card-img-top" alt="img restaurant">
                         @endif
