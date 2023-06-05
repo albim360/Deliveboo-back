@@ -59,7 +59,7 @@ class OrderController extends Controller
             'date' => $request->input('date'),
             'address' => $request->input('address'),
             'email' => $request->input('email'),
-            //'prod' => $request->input('prod')
+            'prod' => $request->input('prod')
         ];
         $order = new Order();
         $order->full_name = $data['name'];
@@ -75,7 +75,7 @@ class OrderController extends Controller
             $quantity = 1;
             $order->products()->attach($prod_id,['quantity' => $quantity]);
         }
-        return response()->json(['success' => 'ordine effettuato :) ']);
+        return response()->json(['success' => $data]);
     }
 
 
