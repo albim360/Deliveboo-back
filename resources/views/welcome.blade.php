@@ -9,7 +9,7 @@
         </div>
         
         <div class="col-md-4 container d-flex align-items-center mt-3 ">
-            <a href="{{ route('products.store') }}" class="product-link">
+            <a href="{{ route('products.store') }}" class="product-link w-100">
                 <img src="{{ url('img/plates.jpg') }}" alt="Prodotti">
                 <h4 class="section-title">I tuoi prodotti</h4>
             </a>
