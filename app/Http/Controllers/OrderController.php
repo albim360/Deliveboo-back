@@ -23,7 +23,8 @@ class OrderController extends Controller
             ->join('products', 'restaurants.id', '=', 'products.restaurant_id')
             ->join('order_product', 'products.id', '=', 'order_product.product_id')
             ->join('orders', 'order_product.order_id', '=', 'orders.id')
-            ->select('orders.*', 'products.id')
+            ->distinct('orders.*', 'products.id')
+            ->orderBy('date', 'desc')
             ->get();
 
         return view('order.index', compact('orders'));
