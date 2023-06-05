@@ -90,7 +90,7 @@
             </div>
         </nav>
         <!-- main -->
-        <main class="container flex-grow-1">
+        <main class="container flex-grow-1 py-5">
             @yield('content')
         </main>
         <!-- footer -->
