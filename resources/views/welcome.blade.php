@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <div class="row py-4 ">
+    <!-- <div class="row py-4 ">
         <div class="col-md-4 container d-flex align-items-center mt-3 ">
             <a href="{{ route('restaurants.index') }}" class="product-link">
                 <img src="{{ url('img/restaurant.jpg') }}" alt="Ristoranti">
@@ -22,4 +22,5 @@
             </a>
         </div>
     </div>
+spostato in dashboard -->
 @endsection
