@@ -31,7 +31,7 @@
                 </div>
             </div>
             <div class="mt-3 text-end">
-                <a href="{{ route('orders.show', $order) }}" class="btn btn-primary">Dettagli</a>
+            <a href="{{ route('orders.show', $order->id) }}" class="btn btn-primary">Dettagli</a>
             </div>
         </div>
     </div>
