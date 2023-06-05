@@ -30,7 +30,7 @@ class OrderSeeder extends Seeder
            
 
             $new_order->save();
-            $product = Product::Find(1);
+            $product = rand(1, 49);
             $quantity = rand(1, 100);
             $new_order->products()->attach($product, ['quantity' => $quantity]);
         }
