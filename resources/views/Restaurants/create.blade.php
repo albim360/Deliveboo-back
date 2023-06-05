@@ -57,13 +57,14 @@
 
       <div class="mb-3">
         <label for="telephone" class="form-label">Telephone</label>
-        <input type="number" class="form-control @error('telephone') is-invalid @enderror" id="telephone" name="telephone"  value="{{ old('telephone') }}">
+        <input type="text" class="form-control @error('telephone') is-invalid @enderror" id="telephone" name="telephone"  value="{{ old('telephone') }}">
         @error('telephone')
             <div class="invalid-feedback">
                 {{ $message }}
             </div>
         @enderror
       </div>
+      
       <div class="mb-3">
         <label for="address" class="form-label">address</label>
         <input type="text" class="form-control @error('address') is-invalid @enderror" id="address" name="address" value="{{ old('address') }}">

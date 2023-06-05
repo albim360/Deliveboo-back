@@ -119,55 +119,54 @@
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
-                                </div>
+                            </div>
 
-                                <div class="mb-4">
-                                    <label for="telephone" class="form-label">Telephone</label>
-                                    <input id="telephone" type="number"
-                                        class="form-control @error('telephone') is-invalid @enderror" name="telephone"
-                                        value="{{ old('telephone') }}" required>
-                                    @error('telephone')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
+                            <div class="mb-4">
+                                <label for="telephone" class="form-label">Telephone</label>
+                                <input id="telephone" type="text"
+                                    class="form-control @error('telephone') is-invalid @enderror" name="telephone"
+                                    value="{{ old('telephone') }}" required>
+                                @error('telephone')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
 
-                                <div class="mb-4">
-                                    <label for="address" class="form-label">Address</label>
-                                    <input id="address" type="text"
-                                        class="form-control @error('address') is-invalid @enderror" name="address"
-                                        value="{{ old('address') }}" required>
-                                    @error('address')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
+                            <div class="mb-4">
+                                <label for="address" class="form-label">Address</label>
+                                <input id="address" type="text"
+                                    class="form-control @error('address') is-invalid @enderror" name="address"
+                                    value="{{ old('address') }}" required>
+                                @error('address')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
 
-                                <div class="mb-3">
-                                    <label for="img_way" class="form-label">Immagine di copertina</label>
-                                    <div class="input-group">
-                                        <input type="file" name="img_way"
-                                            class="form-control @error('img_way') is-invalid @enderror"
-                                            value="{{ old('img_way') }}" id="img_way" aria-describedby="titleHelp">
-                                        <label class="input-group-text" for="img_way">Carica</label>
+                            <div class="mb-3">
+                                <label for="img_way" class="form-label">Immagine di copertina</label>
+                                <div class="input-group">
+                                    <input type="file" name="img_way"
+                                        class="form-control @error('img_way') is-invalid @enderror"
+                                        value="{{ old('img_way') }}" id="img_way" aria-describedby="titleHelp">
+                                    <label class="input-group-text" for="img_way">Carica</label>
+                                </div>
+                                @error('img_way')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
                                     </div>
-                                    @error('img_way')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
+                                @enderror
+                            </div>
 
-
-                                <div class="mb-4">
-                                    <div class="text-center">
-                                        <button type="button" class="btn btn-primary" id="register-button">
-                                            {{ __('Register') }}
-                                        </button>
-                                    </div>
+                            <div class="mb-4">
+                                <div class="text-center">
+                                    <button type="button" class="btn btn-primary" id="register-button">
+                                        {{ __('Register') }}
+                                    </button>
                                 </div>
+                            </div>
                         </form>
                     </div>
                 </div>

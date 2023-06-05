@@ -1,0 +1,29 @@
+.footer {
+    background-color: #ff6600;
+    text-align: center;
+    padding: 20px;
+    color: #fff;
+}
+
+.footer-title {
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.footer-link {
+    transition: color 0.3s ease;
+}
+
+.footer-link:hover {
+    color: #dcdcdc;
+}
+
+.copyright::before {
+    content: '';
+    display: block;
+    height: 1px;
+    width: 100%;
+    margin: 6px 20px;
+    background-color: #fffffff3;
+}
