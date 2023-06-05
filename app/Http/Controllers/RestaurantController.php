@@ -144,7 +144,6 @@ class RestaurantController extends Controller
         return redirect()->route('restaurants.show', $restaurant);
     }
     
-
     /**
      * Remove the specified resource from storage.
      *
@@ -169,7 +168,6 @@ class RestaurantController extends Controller
         return redirect()->route('restaurants.index');
     }
     
-
     /**
      * Filter restaurants by typology.
      *

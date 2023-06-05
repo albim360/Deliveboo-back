@@ -6,7 +6,5 @@
             {{ __('Dashboard') }}
         </h2>
 
-
-
     </div>
 @endsection
