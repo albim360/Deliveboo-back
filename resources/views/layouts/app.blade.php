@@ -46,7 +46,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                        <a href="{{ url('/') }}">
+                        <a href="{{ url('/dashboard') }}">
                          <img src="{{ asset('img/logoprova.png') }}" alt="logo" style="width: 100px">
                         </a>
 
