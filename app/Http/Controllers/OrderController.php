@@ -59,7 +59,8 @@ class OrderController extends Controller
             'date' => $request->input('date'),
             'address' => $request->input('address'),
             'email' => $request->input('email'),
-            'prod' => $request->input('prod')
+            'prod' => $request->input('prod'),
+            'total_payment' => $request->input('total_payment'),
         ];
         $order = new Order();
         $order->full_name = $data['name'];
@@ -67,6 +68,7 @@ class OrderController extends Controller
         $order->address = $data['address'];
         $order->email = $data['email'];
         $order->date = $data['date'];
+        $order->total_payment = $data['total_payment'];
         $order->save();
         $prods = $request->input('prod');
         foreach ($prods as $prod) {
