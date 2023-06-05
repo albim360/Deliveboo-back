@@ -67,30 +67,14 @@ class OrderController extends Controller
         $order->email = $data['email'];
         $order->date = $data['date'];
         $order->save();
-        //if (isset($data['prod'])) {
-        //    $order->products()->attach($data['prod']);
-        //}
         $prods = $request->input('prod');
         foreach ($prods as $prod) {
             $prod_id = $prod['id'];
-            //TODO: quantita provvisoria
+            //TODO: qunantita deve essere modificabile
             $quantity = 1;
-            if (isset($data['prod'])) {
-                $order->products()->attach($prod_id,['quantity' => $quantity]);
-            }
+            $order->products()->attach($prod_id,['quantity' => $quantity]);
         }
-
-        // if (isset($data['products'])) {
-        //     $products = [];
-        //     foreach ($data['products'] as $product) {
-        //         $products[$product] = ['quantity' => $data['quantity']];
-        //     }
-        //     $order->products()->attach($products);
-        // }
-        //var_dump($data);
-
-        //return redirect()->route('orders.show', $order);
-        return response()->json(['success' => $data]);
+        return response()->json(['success' => 'ordine effettuato :) ']);
     }
 
 
@@ -148,12 +132,13 @@ class OrderController extends Controller
      */
     public function destroy($id)
     {
-        if ($product->trashed()) {
-            $product->forceDelete();
-        } else {
-            $product->delete();
-        }
+        //TODO: rivedere
+        // if ($product->trashed()) {
+        //     $product->forceDelete();
+        // } else {
+        //     $product->delete();
+        // }
 
-        return to_route('order.index');
+        // return to_route('order.index');
     }
 }
