@@ -23,9 +23,8 @@
 </head>
 
 <body>
-    <div id="app">
-
-
+    <div id="app" class="app">
+        <!-- navbar -->
         <nav class="navbar navbar-expand-md navbar-light  shadow-sm orange-site">
             <div class="container">
                 <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
@@ -90,15 +89,48 @@
                 </div>
             </div>
         </nav>
-
-        <main class="container">
+        <!-- main -->
+        <main class="container flex-grow-1">
             @yield('content')
         </main>
+        <!-- footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="row text-center">
+                    <div class="col-md-8 ">
+                        <h5 class="footer-title">Deliveboo</h5>
+                        <p class="footer-description">Un modo semplice per ordinare il tuo cibo preferito a domicilio.</p>
+                        <!-- <div class="footer-social">
+                            <a href="#" class="social-icon">
+                            <font-awesome-icon :icon="['fab', 'facebook']" />
+                            </a>
+                            <a href="#" class="social-icon">
+                            <font-awesome-icon :icon="['fab', 'instagram']" />
+                            </a>
+                            <a href="#" class="social-icon">
+                            <font-awesome-icon :icon="['fab', 'twitter']" />
+                            </a>
+                        </div> -->
+                    </div>
+               
+                    <div class="col ">
+                        <h5 class="footer-title">Contatti</h5>
+                        <ul class="footer-links">
+                            <li><a href="#" class="footer-link">Assistenza</a></li>
+                            <li><a href="#" class="footer-link">Termini e condizioni</a></li>
+                            <li><a href="#" class="footer-link">Privacy Policy</a></li>
+                            <li><a href="#" class="footer-link">FAQ</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="text-center copyright">
+                    <p class="footer-copy">&copy; 2023 Deliveboo. Tutti i diritti riservati.</p>
+                </div>
+            </div>
+        </footer>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>
-
-
 
 </html>
 <style>
@@ -106,5 +138,9 @@
         background-color: #ff6600;
     }
 
-
+    .app{
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+    }
 </style>
