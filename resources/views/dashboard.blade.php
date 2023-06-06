@@ -22,7 +22,7 @@
         </a>
     </div>
     <div class="col-md-3 container d-flex align-items-center mt-3 ">
-        <a href="#" class="product-link">  <!--aggiungere rotta Statistiche -->
+        <a href="{{ route('statistics') }}" class="product-link">  <!--aggiungere rotta Statistiche -->
             <img src="{{ url('img/grapich.png') }}" alt="Statistiche">
             <h4 class="section-title">Statistiche</h4>
         </a>
