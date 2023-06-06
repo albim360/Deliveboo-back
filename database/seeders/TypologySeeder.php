@@ -15,7 +15,7 @@ class TypologySeeder extends Seeder
      */
     public function run()
     {
-        $typologies = ['italiano','americana','indiana','cinese','giapponese','coreana','messicana','nepalese','malese','domenicana','spagnola','turca','argentina','brasiliana','hawaiana','greca','rumena','moldava'];
+        $typologies = ['italiana','americana','indiana','cinese','giapponese','coreana','messicana','nepalese','malese','domenicana','spagnola','turca','argentina','brasiliana','hawaiana','greca','rumena','moldava'];
         foreach($typologies as $typology){
            
             $new_typology = new Typology();
